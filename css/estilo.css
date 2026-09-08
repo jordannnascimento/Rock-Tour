@@ -307,30 +307,6 @@ img{display:block;max-width:100%}
   .m3{grid-column:span 3}
   .m4,.m6{grid-column:span 6}
 }
-@media(max-width:900px){
-  .container,.hero-simples .hero-info,.rodape-info{padding-left:20px;padding-right:20px}
-  .topo,.menu-mobile{width:calc(100% - 32px);padding-left:16px;padding-right:16px}
-  .topo::after{left:16px;right:16px}
-  .menu,.busca,.divisor{display:none}
-  .hamburguer{display:block}
-  .logo img{height:40px}
-  .topo{padding:12px 16px}
-  .hero-cheia{min-height:80vh}
-  .hero-conteudo{padding-top:170px;padding-bottom:56px}
-  .dots{padding-bottom:0}
-  .seta-hero{width:44px;height:44px}
-  .hero-nav{gap:12px}
-  .redes-hero a{width:46px;height:46px}
-  .mosaico-grade{grid-template-columns:1fr;grid-auto-rows:180px}
-  .m3,.m4,.m6{grid-column:span 1}
-  .alto{grid-row:span 1}
-  .m-cartao.escuro{transform:none}
-  .cards{grid-template-columns:1fr}
-  .faixa,.duas-colunas,.grid-contato{grid-template-columns:1fr}
-  .hero-simples{height:330px}
-  .nav-rodape.prev{left:14px}
-  .nav-rodape.next{right:14px}
-}
 
 
 /* ================= DESTAQUES ================= */
@@ -345,11 +321,11 @@ img{display:block;max-width:100%}
   position:relative;border-radius:var(--raio);overflow:hidden;min-height:300px;
   background-size:cover;background-position:center;display:flex;align-items:center;
 }
+.destaque .foto-linha{display:none}
 .destaque::before{
   content:"";position:absolute;inset:0;
   background:linear-gradient(90deg,rgba(3,20,44,.35) 0%,rgba(3,20,44,0) 70%);
 }
-.destaque .foto-linha{display:none}
 .destaque .cartao{
   position:relative;z-index:2;background:var(--branco);border-radius:var(--raio);
   width:56%;margin:22px;padding:28px 32px;cursor:pointer;
@@ -367,16 +343,6 @@ img{display:block;max-width:100%}
 .destaque .estrela svg{width:19px;height:19px;fill:var(--laranja)}
 .destaque .estrela b{font-size:12.5px;font-weight:600;line-height:1.25;max-width:110px}
 
-@media(max-width:900px){
-  .fone{display:none}
-  .hero-rodape{flex-direction:column;align-items:flex-start;gap:16px;position:relative;bottom:0;padding-bottom:34px}
-  .selo-hero{max-width:100%}
-  .destaque{min-height:0;flex-direction:column;background-image:none !important}
-  .destaque .foto-linha{display:none}
-.destaque .cartao{width:auto;margin:0}
-  .destaque .foto-linha{width:100%;height:180px;background-size:cover;background-position:center;border-radius:var(--raio) var(--raio) 0 0}
-  .destaque .estrela{top:14px;right:14px}
-}
 
 
 /* ================= WHATSAPP FLUTUANTE ================= */
@@ -415,4 +381,129 @@ img{display:block;max-width:100%}
 }
 @media(prefers-reduced-motion:reduce){
   .zap .pulso{animation:none;opacity:0}
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media(max-width:900px){
+
+  /* ---- base ---- */
+  body{font-size:1rem;line-height:1.65}
+  h1{font-size:1.875rem;line-height:1.18}     /* 30px */
+  h2{font-size:1.5rem;line-height:1.25}       /* 24px */
+  h3{font-size:1.25rem}                       /* 20px */
+  p{font-size:1rem;line-height:1.65}
+  .container,.hero-simples .hero-info,.rodape-info{padding-left:20px;padding-right:20px}
+
+  /* ---- nav ---- */
+  .topo,.menu-mobile{width:calc(100% - 28px);padding-left:16px;padding-right:16px}
+  .topo{top:14px;padding-top:10px;padding-bottom:10px;gap:12px}
+  .topo::after{left:16px;right:16px;height:2px}
+  .menu,.busca,.divisor,.fone{display:none}
+  .hamburguer{display:block}
+  .logo img{height:38px}
+  .menu-mobile{top:82px;width:calc(100% - 28px)}
+
+  /* ---- hero ---- */
+  .hero-cheia{min-height:0;flex-direction:column;align-items:stretch}
+  .hero-cheia::after{background:linear-gradient(180deg,rgba(3,20,44,.5) 0%,rgba(3,20,44,.72) 45%,rgba(3,20,44,.9) 100%)}
+  .hero-conteudo{padding-top:120px;padding-bottom:32px;max-width:100%}
+  .hero-cheia h1{font-size:1.875rem;margin-top:14px}
+  .hero-cheia p{font-size:1rem;margin-top:12px;max-width:100%}
+  .selo{font-size:12.5px;padding:7px 14px}
+  .botoes{margin-top:22px;gap:10px}
+  .btn-lima,.btn-vidro{padding:14px 22px;font-size:15px;flex:1;justify-content:center}
+  .bolha{width:26px;height:26px}
+
+  /* rodape da hero deixa de ser sobreposto e vira bloco */
+  .hero-rodape{
+    position:relative;bottom:auto;left:auto;right:auto;
+    flex-direction:column;align-items:stretch;gap:20px;padding-bottom:36px;
+  }
+  .hero-nav{align-self:flex-start;order:1;gap:12px}
+  .seta-hero{width:44px;height:44px}
+  .seta-hero svg{width:18px;height:18px}
+  .redes-hero{order:2}
+  .redes-hero a{width:46px;height:46px}
+  .redes-hero svg{width:20px;height:20px}
+  .selo-hero{order:3;max-width:100%;padding:14px 18px;gap:14px}
+  .selo-hero img{height:44px}
+  .selo-hero p{font-size:13.5px}
+
+  /* ---- mosaico ---- */
+  .mosaico{padding:56px 0 60px}
+  .mosaico-topo{margin-bottom:30px}
+  .mosaico-grade{grid-template-columns:1fr;grid-auto-rows:auto;gap:14px}
+  .m3,.m4,.m6{grid-column:span 1}
+  .alto{grid-row:span 1}
+  .m-foto{height:190px}
+  .m-cartao{min-height:0;padding:24px;transform:none}
+  .m-cartao.escuro{padding:28px 24px}
+  .m-cartao.escuro .numero{font-size:52px}
+  .m-cartao.escuro .rotulo{font-size:18px}
+  .m-cartao .marca{top:16px;right:16px;width:32px;height:32px}
+  .m-frase{padding:14px 4px}
+  .m-frase h3{font-size:22px}
+  .m-frase svg{width:36px;height:36px}
+  .mosaico .traco{display:none}
+
+  /* ---- destaques ---- */
+  .destaques{padding:56px 0 10px}
+  .destaques-titulo{margin-bottom:26px}
+  .destaque{min-height:0;flex-direction:column;background-image:none !important;background:var(--fundo-suave)}
+  .destaque::before{display:none}
+  .destaque .foto-linha{display:block;width:100%;height:190px;background-size:cover;background-position:center;border-radius:var(--raio) var(--raio) 0 0}
+  .destaque .cartao{width:100%;margin:0;padding:22px 20px 24px;border-radius:0 0 var(--raio) var(--raio)}
+  .destaque h3{font-size:21px}
+  .destaque p{font-size:15px;-webkit-line-clamp:5}
+  .destaque .chips{gap:12px}
+  .destaque .chips span{font-size:13px}
+  .destaque .estrela{top:14px;right:14px;padding:6px 14px 6px 9px}
+  .destaque .estrela b{font-size:11.5px}
+
+  /* ---- listas, faixa e textos ---- */
+  .cards{grid-template-columns:1fr}
+  .card{height:250px}
+  .faixa,.duas-colunas,.grid-contato{grid-template-columns:1fr}
+  .faixa-texto{padding:28px 22px}
+  .faixa-texto h2{font-size:23px}
+  .faixa-foto{min-height:170px}
+  .conteudo,.duas-colunas,.grid-contato{padding-top:44px}
+  .secao-titulo{font-size:22px}
+  .hero-simples{height:300px}
+  .hero-simples .hero-info{padding-bottom:32px}
+  .comece{padding:40px 0 26px;font-size:16px}
+
+  /* ---- rodape ---- */
+  .rodape{height:auto;min-height:0;padding-top:150px}
+  .rodape-info{padding-bottom:34px}
+  .rodape-info h2{font-size:26px}
+  .redes{flex-direction:column;gap:12px;margin-top:16px}
+  .redes a{font-size:14px}
+  /* setas saem do meio para nao cortar o titulo */
+  .nav-rodape{top:22px;transform:none;width:38px;height:38px}
+  .nav-rodape.prev{left:auto;right:70px}
+  .nav-rodape.next{right:20px}
+  .assinatura{padding:24px 0 26px}
+  .assinatura img{height:44px}
+
+  /* ---- whatsapp ---- */
+  .zap{right:16px;bottom:20px}
+
+  /* ---- modal ---- */
+  .modal{padding:16px}
+  .modal-foto{height:170px}
+  .modal-corpo{padding:20px 20px 24px}
+  .modal-corpo h3{font-size:23px}
+  .modal-acoes{flex-direction:column}
+  .modal-acoes a,.modal-acoes button{text-align:center}
+}
+
+@media(max-width:420px){
+  .hero-cheia h1{font-size:1.6875rem}          /* 27px */
+  .botoes{flex-direction:column;align-items:stretch}
+  .btn-lima,.btn-vidro{width:100%}
+  .destaques-titulo mark{padding:1px 14px 4px}
 }
