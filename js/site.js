@@ -1,9 +1,12 @@
 /* =========================================================
-   Rock Tour — dados e comportamentos compartilhados
+   Rock Tour: dados e comportamentos compartilhados
    Para trocar uma foto, altere o campo "img" do item.
    ========================================================= */
 
 const WPP = "https://wa.me/5541998622142";
+
+/* textos montados aqui no JS passam pela tradução (js/traducao.js) */
+const t = s => (window.i18n ? window.i18n.t(s) : s);
 
 /* Fotos temporárias do Wikimedia Commons (uso livre, com crédito).
    Substituir pelas fotos próprias da Rock Tour quando disponíveis. */
@@ -139,7 +142,7 @@ function montaBusca(){
     const achou = TODOS.find(r =>
       r.nome.toLowerCase().includes(t) || r.local.toLowerCase().includes(t));
     if(achou) abreModal(achou);
-    else alert("Nenhum roteiro encontrado para: " + e.target.value);
+    else alert(t("Nenhum roteiro encontrado para:") + " " + e.target.value);
   });
 }
 
@@ -419,7 +422,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     document.getElementById("enviar").onclick = ()=>{
       const nome = document.getElementById("f-nome").value.trim();
       const msg  = document.getElementById("f-msg").value.trim();
-      const texto = `Olá, Rock Tour! Meu nome é ${nome || "(sem nome)"}. ${msg}`;
+      const texto = `${t("Olá, Rock Tour! Meu nome é")} ${nome || t("(sem nome)")}. ${msg}`;
       window.open(`${WPP}?text=${encodeURIComponent(texto)}`, "_blank");
     };
   }

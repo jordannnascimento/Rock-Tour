@@ -507,3 +507,33 @@ img{display:block;max-width:100%}
   .btn-lima,.btn-vidro{width:100%}
   .destaques-titulo mark{padding:1px 14px 4px}
 }
+
+/* ================= IDIOMA (PT / EN) =================
+   Os botoes sao criados pelo js/traducao.js dentro da barra do topo. */
+.idioma{display:flex;gap:2px;flex-shrink:0}
+.idioma button{
+  font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--cinza);
+  background:none;border:0;cursor:pointer;padding:6px 9px;border-radius:6px;
+}
+.idioma button:hover{color:var(--azul)}
+.idioma button[aria-pressed="true"]{color:var(--azul);background:var(--fundo-suave)}
+.idioma button:focus-visible{outline:2px solid var(--azul);outline-offset:1px}
+/* com o seletor de idioma, os links ficam um pouco mais juntos no desktop */
+@media(min-width:1341px){
+  .menu{gap:18px}
+  .menu a{font-size:14.5px}
+}
+/* a busca pode encolher para dar espaco aos links */
+.busca{min-width:0}
+.busca input{min-width:0}
+/* abaixo de 1200px a barra usa o menu de celular, para os links nao estourarem a largura */
+@media(max-width:1200px){
+  .topo,.menu-mobile{width:calc(100% - 28px);padding-left:16px;padding-right:16px}
+  .topo{top:14px;padding-top:10px;padding-bottom:10px;gap:12px}
+  .topo::after{left:16px;right:16px;height:2px}
+  .menu,.busca,.divisor,.fone{display:none}
+  .idioma{margin-left:auto}
+  .hamburguer{display:block;margin-left:4px}
+  .logo img{height:38px}
+  .menu-mobile{top:82px}
+}
