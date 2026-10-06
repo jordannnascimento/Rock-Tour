@@ -1,130 +1,135 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Paraná | Rock Tour</title>
-<meta name="description" content="Curitiba, Trem da Serra do Mar, Morretes, Ilha do Mel, Superagui e Foz do Iguaçu.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="assets/img/simbolo.png">
-<link rel="stylesheet" href="css/estilo.css">
-<script src="js/traducao.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paraná :: RockTour Tourism</title>
+  <meta name="description" content="PASSEIO DE TREM : é a possibilidade a conhecer a mata atlântica, a fazer um passeio por Morretes e Antonina e saborear comidas típicas dos locais.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/simbolo.png">
+  <link rel="apple-touch-icon" href="img/simbolo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="page">
 
-  <header class="topo">
-    <a class="logo" href="index.html"><img src="assets/img/logo.png" alt="Rock Tour Tourism"></a>
-    <div class="divisor"></div>
-    <label class="busca">
-      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      <input placeholder="Encontre seu destino" id="busca">
-    </label>
-    <nav class="menu"></nav>
-    <a class="fone" href="https://wa.me/5541998622142" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1z"/></svg>
-      41 99862-2142
-    </a>
-    <button class="hamburguer" aria-label="Menu">&#9776;</button>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><img src="img/logo.png" alt="Rock Tour"></a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+      <nav class="nav" id="nav">
+        <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="a-banda.html">Nossa história</a></li>
+        <li><a href="discografia.html">Mundo Mórmon</a></li>
+        <li><a href="pacotes-internacionais.html">Pacotes Internacionais</a></li>
+        <li><a href="pacotes-nacionais.html">Pacotes Nacionais</a></li>
+        <li><a href="parana.html" class="active">Paraná</a></li>
+        <li><a href="contato2.html">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="lang">
+        <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Idioma / Language">
+          <span class="lang-flag"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009c3b"/><path d="M15 2.4 27.6 10 15 17.6 2.4 10z" fill="#ffdf00"/><circle cx="15" cy="10" r="4.7" fill="#002776"/><path d="M10.5 9.1q4.6-1.6 9 1.6" stroke="#fff" stroke-width="0.9" fill="none"/></svg></span><span class="lang-current">PT</span><i class="fa-solid fa-chevron-down lang-caret"></i>
+        </button>
+        <ul class="lang-menu" hidden>
+          <li><button type="button" data-lang="pt"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009c3b"/><path d="M15 2.4 27.6 10 15 17.6 2.4 10z" fill="#ffdf00"/><circle cx="15" cy="10" r="4.7" fill="#002776"/><path d="M10.5 9.1q4.6-1.6 9 1.6" stroke="#fff" stroke-width="0.9" fill="none"/></svg><span>Português</span></button></li>
+          <li><button type="button" data-lang="en"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#b22234"/><rect y="1.538" width="30" height="1.538" fill="#fff"/><rect y="4.615" width="30" height="1.538" fill="#fff"/><rect y="7.692" width="30" height="1.538" fill="#fff"/><rect y="10.769" width="30" height="1.538" fill="#fff"/><rect y="13.846" width="30" height="1.538" fill="#fff"/><rect y="16.923" width="30" height="1.538" fill="#fff"/><rect width="12" height="10.769" fill="#3c3b6e"/></svg><span>English</span></button></li>
+          <li><button type="button" data-lang="es"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#aa151b"/><rect y="5" width="30" height="10" fill="#f1bf00"/></svg><span>Español</span></button></li>
+          <li><button type="button" data-lang="fr"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#ef4135"/><rect width="20" height="20" fill="#fff"/><rect width="10" height="20" fill="#0055a4"/></svg><span>Français</span></button></li>
+          <li><button type="button" data-lang="ja"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><circle cx="15" cy="10" r="6" fill="#bc002d"/></svg><span>日本語</span></button></li>
+        </ul>
+      </div>
+    </div>
   </header>
-  <nav class="menu-mobile"></nav>
 
-  <section class="hero-simples" data-foto="topo">
-    <div class="hero-info">
-      <h1>Paraná</h1>
-      <p>Do centro de Curitiba ao litoral e às Cataratas</p>
+  <section class="hero page-hero" style="background-image: url('https://97afcb185d.cbaul-cdnwnd.com/6f993fae9f1f40d95bb15cda1f112e9f/200000069-8237b83302/trem%20serra.jpg?ph=97afcb185d');">
+    <div class="container">
+      <h1>PARANÁ</h1>
     </div>
   </section>
 
-  <div class="container">
+  <section class="section">
+    <div class="container">
+      <div class="gallery">
+        <figure>
+          <img src="https://97afcb185d.cbaul-cdnwnd.com/6f993fae9f1f40d95bb15cda1f112e9f/200000035-9263a9361d/Curitiba-139-3-1024x575.jpg?ph=97afcb185d" alt="">
+          <figcaption>PASSEIO DE TREM NA SERRA</figcaption>
+        </figure>
+        <figure>
+          <img src="https://97afcb185d.cbaul-cdnwnd.com/6f993fae9f1f40d95bb15cda1f112e9f/200000045-7d64b7efac/tumblr_mdrjs3m8M11ql734to1_1280.jpg?ph=97afcb185d" alt="">
+          <figcaption>LITORAL</figcaption>
+        </figure>
+        <figure>
+          <img src="https://97afcb185d.cbaul-cdnwnd.com/6f993fae9f1f40d95bb15cda1f112e9f/200000070-61c5962c1e/villa.jpg?ph=97afcb185d" alt="">
+          <figcaption>INTERIOR</figcaption>
+        </figure>
+        <figure>
+          <img src="https://97afcb185d.cbaul-cdnwnd.com/6f993fae9f1f40d95bb15cda1f112e9f/200000071-110f9120ad/GUIA.jpg?ph=97afcb185d" alt="">
+          <figcaption>GUIAMENTO</figcaption>
+        </figure>
+      </div>
 
-
-  <div class="conteudo" style="padding-bottom:22px">
-    <h2>Roteiros pelo Paraná</h2>
-    <p>A Rock Tour é de Curitiba e conhece o estado de perto. São passeios de um dia, fins de semana e roteiros completos pelo litoral e pelo oeste do Paraná.</p>
-  </div>
-
-  <div class="cards" id="grade-parana"></div>
-  <div style="height:30px"></div>
-
-  <section class="faixa">
-    <div class="faixa-texto">
-      <h2>Viaje com quem conhece o caminho</h2>
-      <p>Roteiros guiados por quem vive o turismo há mais de uma década. Você escolhe o destino e a Rock Tour cuida do resto.</p>
-      <a class="btn-azul" href="contato.html">Fale conosco</a>
-    </div>
-    <div class="faixa-foto" data-foto="grupo"><span>Rock Tour</span></div>
-  </section>
-
-<script>
-document.addEventListener("DOMContentLoaded",function(){
-  montaGrade("grade-parana", ROTEIROS.filter(function(r){return r.regiao==="parana";}));
-});
-</script>
-  </div>
-
-  <a class="comece" href="contato.html">Comece sua viagem</a>
-
-  <section class="rodape" id="rodape">
-    <button class="nav-rodape prev" id="rod-prev" aria-label="Anterior">
-      <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
-    </button>
-    <button class="nav-rodape next" id="rod-next" aria-label="Próximo">
-      <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-    </button>
-    <div class="rodape-info">
-      <h2>Siga a Rock Tour</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/rocktouragencia/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h3l1-3h-4v-2c0-.6.4-1 1-1z"/></svg>
-          facebook.com/rocktouragencia
-        </a>
-        <a href="https://wa.me/5541998622142" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.3A10 10 0 1012 2z"/></svg>
-          41 99862-2142
-        </a>
-        <a href="mailto:agenciarocktour@hotmail.com">
-          <svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="#fff" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="#fff" stroke-width="2"/></svg>
-          agenciarocktour@hotmail.com
-        </a>
-        <a href="contato.html">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#fff" stroke-width="2"/><path d="M12 8v5l3 2" fill="none" stroke="#fff" stroke-width="2"/></svg>
-          Curitiba, Paraná
-        </a>
+      <div class="text-block">
+        <p><strong>PASSEIO DE TREM :</strong> é apossibilidade a conhecer a mata atlântica, a fazer um passeio por Morretes e Antonina e saborear comidas típicas dos locais.</p>
+        <p><strong>LITORAL:</strong> o segundo menor litoral do país, porém com uma vasta biodiversidade, que contempla o equilíbrio de animais, baias, culturas e lindas paisagens.</p>
+        <p><strong>INTERIOR:</strong> campos, formações geológicas, cachoeiras e trilhas com a forte cultura europeia.</p>
+        <p><strong>GUIAMENTO:</strong> guias autorizados pelo ministério do turismo e multilíngues.</p>
       </div>
     </div>
   </section>
 
-  <div class="assinatura"><img src="assets/img/logo.png" alt="Rock Tour"></div>
-</div>
-
-<div class="modal" id="modal">
-  <div class="modal-box">
-    <div class="modal-foto" id="modal-foto"></div>
-    <div class="modal-corpo">
-      <h3 id="modal-titulo"></h3>
-      <div class="local" id="modal-local"></div>
-      <p class="txt" id="modal-texto"></p>
-      <div class="modal-acoes">
-        <a href="https://wa.me/5541998622142" target="_blank" rel="noopener">Reservar no WhatsApp</a>
-        <button id="modal-fechar">Fechar</button>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="logo"><img src="img/logo.png" alt="Rock Tour"></a>
+        <p>Para nós da Rock Tour viajar está na lista das cinco melhores coisas do mundo.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="a-banda.html">Nossa história</a></li>
+          <li><a href="discografia.html">Mundo Mórmon</a></li>
+          <li><a href="pacotes-internacionais.html">Pacotes Internacionais</a></li>
+          <li><a href="pacotes-nacionais.html">Pacotes Nacionais</a></li>
+          <li><a href="parana.html">Paraná</a></li>
+          <li><a href="contato2.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul class="footer-contact">
+          <li><i class="fa-solid fa-envelope"></i><a href="mailto:agenciarocktour@hotmail.com">agenciarocktour@hotmail.com</a></li>
+          <li><i class="fa-solid fa-mobile-screen"></i><a href="tel:+13853437555">+1 (385) 343-7555</a></li>
+        </ul>
+        <div class="social">
+          <a href="https://www.facebook.com/rocktouragencia/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#instagram" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
       </div>
     </div>
+    <div class="footer-bottom">
+      <p>© <span class="year">2026</span> Rock Tour. <span>Todos os direitos reservados.</span></p>
+    </div>
+  </footer>
+
+  <!-- Botão flutuante do WhatsApp -->
+  <a href="https://wa.me/13853437555" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <!-- Player do YouTube (o vídeo é definido em js/main.js) -->
+  <div class="yt-player" id="ytPlayer" hidden>
+    <div class="yt-head">
+      <span><i class="fa-solid fa-music"></i> <span>Música</span></span>
+      <button class="yt-close" type="button" aria-label="Fechar player"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="yt-frame"><div id="ytFrame"></div></div>
   </div>
-</div>
+  <button class="music-btn" type="button" aria-label="Abrir player de música" aria-expanded="false"><i class="fa-solid fa-music"></i></button>
 
-
-<a class="zap" href="https://wa.me/5541998622142?text=Quero%20saber%20mais%20informa%C3%A7%C3%B5es"
-   target="_blank" rel="noopener" aria-label="Falar com a Rock Tour no WhatsApp">
-  <span class="pulso" aria-hidden="true"></span>
-  <span class="icone">
-    <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5 0-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.3z"/><path d="M12 2A10 10 0 003.4 17.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3-.2-.3a8.2 8.2 0 1113.4 2.1 8.1 8.1 0 01-6.3 1.8z"/></svg>
-  </span>
-  <b>Quero saber mais</b>
-</a>
-
-<script src="js/site.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
