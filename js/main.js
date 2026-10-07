@@ -122,8 +122,12 @@ if (card && musicBtn && YOUTUBE_IDS.length) {
   musicBtn.hidden = true;
 }
 
-// Idiomas: português, inglês, espanhol, francês e japonês
-const LANGS = ['pt', 'en', 'es', 'fr', 'ja'];
+// Idiomas do site
+const LANGS = ['pt', 'en', 'es', 'fr', 'ja', 'de', 'it', 'he', 'zh', 'sv', 'no', 'fi', 'da', 'el'];
+// Código usado no atributo lang da página
+const HTML_LANG = { pt: 'pt-BR', zh: 'zh-CN', no: 'nb' };
+// Idiomas escritos da direita para a esquerda
+const RTL = ['he'];
 const norm = (html) => html.replace(/<br\s*\/?>/gi, '<br>').replace(/\s+/g, ' ').trim();
 const i18nEls = [];
 
@@ -152,7 +156,8 @@ function setLang(lang) {
     if (el.tagName === 'TITLE') document.title = value;
     else el.innerHTML = value;
   });
-  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+  document.documentElement.lang = HTML_LANG[lang] || lang;
+  document.documentElement.dir = RTL.includes(lang) ? 'rtl' : 'ltr';
   if (langCurrent) langCurrent.textContent = lang.toUpperCase();
   // Mostra a bandeira do idioma escolhido no botão
   const flagSlot = document.querySelector('.lang-flag');
