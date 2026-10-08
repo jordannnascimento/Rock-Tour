@@ -37,6 +37,10 @@ const wasClosed = () => RESUME && sessionStorage.getItem('ytClosed') === '1';
 const ctrl = { play() { wantPlay = true; }, pause() {}, save() {} };
 
 const isOpen = () => !card.hidden;
+function welcomeOpen() {
+  const w = document.getElementById('welcome');
+  return !!w && !w.hidden;
+}
 const setOpen = (open) => {
   card.hidden = !open;
   musicBtn.setAttribute('aria-expanded', open);
@@ -231,8 +235,10 @@ function startMp3(PLAYLIST) {
   // Abre o player e tenta tocar assim que a página abre
   if (!wasClosed()) setOpen(true);
   audio.addEventListener('playing', () => playBtn.classList.remove('waiting'));
-  if (isOpen() || wantPlay) {
+  if ((isOpen() || wantPlay) && !welcomeOpen()) {
     audio.play().then(() => { wantPlay = true; }).catch(() => playBtn.classList.add('waiting'));
+  } else if (wantPlay) {
+    audio.play().catch(() => playBtn.classList.add('waiting'));
   }
 }
 
@@ -274,6 +280,28 @@ if (card && musicBtn) {
   musicBtn.hidden = true;
 }
 
+// Tela de boas-vindas: o clique em "Ver site" fecha a tela e começa a música.
+// A música só para se a pessoa pausar; trocar de página não interrompe.
+const welcome = document.getElementById('welcome');
+function enterSite() {
+  if (!welcome || welcome.hidden) return;
+  document.documentElement.classList.remove('welcome-open');
+  welcome.classList.add('closing');
+  setTimeout(() => { welcome.hidden = true; welcome.classList.remove('closing'); }, 300);
+  if (card && musicBtn && !musicBtn.hidden) {
+    setOpen(true);
+    sessionStorage.setItem('ytClosed', '0');
+    ctrl.play();
+  }
+}
+if (welcome) {
+  document.documentElement.classList.add('welcome-open');
+  const enterBtn = welcome.querySelector('.btn-welcome');
+  enterBtn.addEventListener('click', enterSite);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') enterSite(); });
+  enterBtn.focus();
+}
+
 // WhatsApp: abre a conversa já com uma mensagem pronta no idioma do site
 const WHATS_NUMBER = '13853437555';
 const WHATS_MSG = {
@@ -306,12 +334,14 @@ const HTML_LANG = { pt: 'pt-BR', zh: 'zh-CN', no: 'nb' };
 // Idiomas escritos da direita para a esquerda
 const RTL = ['he'];
 const norm = (html) => html.replace(/<br\s*\/?>/gi, '<br>').replace(/\s+/g, ' ').trim();
-const i18nEls = [];
+let i18nEls = [];
 
-if (typeof I18N !== 'undefined') {
-  // Marca os elementos que têm tradução e guarda o texto original
-  document.querySelectorAll('title, h1, h2, h3, h4, p, a, li, figcaption, cite, span, button').forEach((el) => {
-    if (el.closest('.lang')) return;
+// Marca os elementos que têm tradução e guarda o texto original
+function tagI18n(root) {
+  if (typeof I18N === 'undefined') return;
+  const list = root.querySelectorAll('h1, h2, h3, h4, p, a, li, figcaption, cite, span, button');
+  [...(root === document ? [document.querySelector('title')] : []), ...list].forEach((el) => {
+    if (!el || el.closest('.lang') || el.dataset.i18nKey) return;
     const original = el.tagName === 'TITLE' ? el.textContent.trim() : norm(el.innerHTML);
     if (I18N[original]) {
       el.dataset.i18nKey = original;
@@ -320,6 +350,7 @@ if (typeof I18N !== 'undefined') {
     }
   });
 }
+tagI18n(document);
 
 const langBtn = document.querySelector('.lang-btn');
 const langMenu = document.querySelector('.lang-menu');
@@ -327,6 +358,7 @@ const langCurrent = document.querySelector('.lang-current');
 
 function setLang(lang) {
   if (!LANGS.includes(lang)) lang = 'pt';
+  i18nEls = i18nEls.filter((el) => el.isConnected);
   i18nEls.forEach((el) => {
     const t = I18N[el.dataset.i18nKey];
     const value = lang === 'pt' ? el.dataset.i18nPt : (t && t[lang]) || el.dataset.i18nPt;
@@ -389,7 +421,8 @@ const FORM_MSG = {
   el: ['Αποστολή...', 'Το μήνυμα στάλθηκε! Θα απαντήσουμε σύντομα.', 'Δεν ήταν δυνατή η αποστολή. Γράψτε στο']
 };
 
-document.querySelectorAll('.contact-form').forEach((form) => {
+function bindForms(root) {
+root.querySelectorAll('.contact-form').forEach((form) => {
   const status = form.querySelector('.form-status');
   const button = form.querySelector('button[type="submit"]');
   const msg = () => {
@@ -443,4 +476,65 @@ document.querySelectorAll('.contact-form').forEach((form) => {
       .finally(() => { button.disabled = false; });
   });
 });
+}
+bindForms(document);
 updateWhatsLinks(savedLang);
+
+// Troca de página sem recarregar o site inteiro, para a música não parar.
+// Só o conteúdo do meio (<main id="conteudo">) é trocado; menu, rodapé e player continuam.
+const pageMain = document.getElementById('conteudo');
+
+function markActive(url) {
+  const file = new URL(url, location.href).pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav a').forEach((a) => {
+    a.classList.toggle('active', a.getAttribute('href') === file);
+  });
+}
+
+async function goTo(url, push) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(res.status);
+    const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+    const next = doc.getElementById('conteudo');
+    if (!next) throw new Error('sem conteúdo');
+
+    pageMain.innerHTML = next.innerHTML;
+    // título da aba (e tradução dele)
+    const titleEl = document.querySelector('title');
+    titleEl.textContent = doc.title;
+    delete titleEl.dataset.i18nKey;
+    delete titleEl.dataset.i18nPt;
+    i18nEls = i18nEls.filter((el) => el.isConnected && el !== titleEl);
+    tagI18n(document);
+
+    if (push) history.pushState({}, '', url);
+    markActive(url);
+    if (nav) nav.classList.remove('open');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+
+    // liga o que é da página nova: formulário, traduções e WhatsApp
+    bindForms(pageMain);
+    let lang = 'pt';
+    try { lang = localStorage.getItem('lang') || 'pt'; } catch (e) {}
+    setLang(lang);
+    window.scrollTo(0, 0);
+  } catch (e) {
+    // Se algo der errado (ou o site for aberto direto do computador), abre a página do jeito normal
+    location.href = url;
+  }
+}
+
+if (pageMain && location.protocol !== 'file:') {
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href]');
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (a.target === '_blank' || a.hasAttribute('download')) return;
+    const url = new URL(a.getAttribute('href'), location.href);
+    if (url.origin !== location.origin || !/\.html$/.test(url.pathname) || /teste-musicas\.html$/.test(url.pathname)) return;
+    e.preventDefault();
+    if (url.href === location.href) { window.scrollTo(0, 0); return; }
+    goTo(url.href, true);
+  });
+  window.addEventListener('popstate', () => goTo(location.href, false));
+}

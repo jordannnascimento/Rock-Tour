@@ -1394,5 +1394,50 @@ const I18N = {
   "fi": "Lähetä viesti WhatsAppissa",
   "da": "Send besked på WhatsApp",
   "el": "Στείλτε μήνυμα στο WhatsApp"
+ },
+ "Bem-vindo à Rock Tour!": {
+  "en": "Welcome to Rock Tour!",
+  "es": "¡Bienvenido a Rock Tour!",
+  "fr": "Bienvenue chez Rock Tour !",
+  "ja": "Rock Tourへようこそ！",
+  "de": "Willkommen bei Rock Tour!",
+  "it": "Benvenuto in Rock Tour!",
+  "he": "ברוכים הבאים ל-Rock Tour!",
+  "zh": "欢迎来到Rock Tour！",
+  "sv": "Välkommen till Rock Tour!",
+  "no": "Velkommen til Rock Tour!",
+  "fi": "Tervetuloa Rock Touriin!",
+  "da": "Velkommen til Rock Tour!",
+  "el": "Καλώς ήρθατε στη Rock Tour!"
+ },
+ "A música começa quando você entrar no site.": {
+  "en": "The music starts when you enter the site.",
+  "es": "La música empieza cuando entras al sitio.",
+  "fr": "La musique démarre quand vous entrez sur le site.",
+  "ja": "サイトに入ると音楽が流れます。",
+  "de": "Die Musik startet, wenn Sie die Website betreten.",
+  "it": "La musica parte quando entri nel sito.",
+  "he": "המוזיקה תתחיל כשתיכנסו לאתר.",
+  "zh": "进入网站后音乐将开始播放。",
+  "sv": "Musiken startar när du går in på webbplatsen.",
+  "no": "Musikken starter når du går inn på nettsiden.",
+  "fi": "Musiikki alkaa, kun siirryt sivustolle.",
+  "da": "Musikken starter, når du går ind på siden.",
+  "el": "Η μουσική ξεκινά μόλις μπείτε στην ιστοσελίδα."
+ },
+ "Ver site": {
+  "en": "Enter site",
+  "es": "Ver sitio",
+  "fr": "Voir le site",
+  "ja": "サイトを見る",
+  "de": "Website ansehen",
+  "it": "Vedi il sito",
+  "he": "כניסה לאתר",
+  "zh": "进入网站",
+  "sv": "Visa webbplatsen",
+  "no": "Se nettsiden",
+  "fi": "Katso sivusto",
+  "da": "Se siden",
+  "el": "Δείτε την ιστοσελίδα"
  }
 };

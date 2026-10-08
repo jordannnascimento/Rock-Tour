@@ -12,8 +12,19 @@
   <link rel="apple-touch-icon" href="img/simbolo-rocktour.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <noscript><style>.welcome { display: none !important; }</style></noscript>
 </head>
 <body>
+
+  <!-- Boas-vindas: o clique em "Ver site" libera o som e começa a música -->
+  <div class="welcome" id="welcome" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+    <div class="welcome-box">
+      <img src="img/logo-rocktour.png" alt="Rock Tour" class="welcome-logo">
+      <h2 id="welcomeTitle">Bem-vindo à Rock Tour!</h2>
+      <p>A música começa quando você entrar no site.</p>
+      <button type="button" class="btn-welcome">Ver site</button>
+    </div>
+  </div>
 
   <header class="site-header">
     <div class="header-inner">
@@ -54,6 +65,7 @@
     </div>
   </header>
 
+  <main id="conteudo">
   <section class="hero page-hero" style="background-image: url('https://97afcb185d.cbaul-cdnwnd.com/6f993fae9f1f40d95bb15cda1f112e9f/200000069-8237b83302/trem%20serra.jpg?ph=97afcb185d');">
     <div class="container">
       <h1>PARANÁ</h1>
@@ -89,6 +101,7 @@
       </div>
     </div>
   </section>
+  </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
