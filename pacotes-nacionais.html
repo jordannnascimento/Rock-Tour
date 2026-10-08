@@ -138,13 +138,21 @@
   <!-- Botão flutuante do WhatsApp -->
   <a href="https://wa.me/13853437555" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
 
-  <!-- Player do YouTube (o vídeo é definido em js/main.js) -->
+  <!-- Player de música (mp3 ou YouTube, definido em js/main.js) -->
   <div class="yt-player" id="ytPlayer" hidden>
     <div class="yt-head">
       <span><i class="fa-solid fa-music"></i> <span>Música</span></span>
       <button class="yt-close" type="button" aria-label="Fechar player"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="yt-frame"><div id="ytFrame"></div></div>
+    <div class="mp3-ui" hidden>
+      <p class="mp3-title"></p>
+      <div class="mp3-controls">
+        <button type="button" class="mp3-prev" aria-label="Música anterior"><i class="fa-solid fa-backward-step"></i></button>
+        <button type="button" class="mp3-play" aria-label="Tocar"><i class="fa-solid fa-play"></i></button>
+        <button type="button" class="mp3-next" aria-label="Próxima música"><i class="fa-solid fa-forward-step"></i></button>
+      </div>
+    </div>
   </div>
   <button class="music-btn" type="button" aria-label="Abrir player de música" aria-expanded="false"><i class="fa-solid fa-music"></i></button>
 

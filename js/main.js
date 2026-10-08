@@ -14,18 +14,20 @@ document.querySelectorAll('.year').forEach((el) => {
   el.textContent = new Date().getFullYear();
 });
 
-// Player do YouTube
-// Coloque aqui um ou mais vídeos (o código que vem depois de "watch?v=" no link).
-// Se um estiver bloqueado para tocar em sites, o player passa sozinho para o próximo.
-const YOUTUBE_IDS = ['CD-E-LDc384'];
+// Player de música
+// 1) Arquivos mp3 na pasta audio/. Se a lista tiver arquivos, o site usa eles.
+//    Exemplo: const AUDIO_FILES = ['audio/musica-1.mp3', 'audio/musica-2.mp3'];
+// 2) Se a lista de mp3 estiver vazia (ou nenhum arquivo abrir), o site usa os vídeos do YouTube.
+//    O código do vídeo é o que vem depois de "watch?v=" ou "youtu.be/" no link.
+const AUDIO_FILES = [];
+const YOUTUBE_IDS = ['nSQzXOgIQjM', 'CD-E-LDc384'];
 
 const card = document.getElementById('ytPlayer');
 const musicBtn = document.querySelector('.music-btn');
 const closeBtn = document.querySelector('.yt-close');
-let player = null;
-let ready = false;
 let wantPlay = false;
-let current = 0;
+// Comandos do player que estiver ativo (mp3 ou YouTube)
+const ctrl = { play() { wantPlay = true; }, pause() {}, save() {} };
 
 const isOpen = () => !card.hidden;
 const setOpen = (open) => {
@@ -33,20 +35,33 @@ const setOpen = (open) => {
   musicBtn.setAttribute('aria-expanded', open);
   musicBtn.setAttribute('aria-label', open ? 'Fechar player de música' : 'Abrir player de música');
 };
-const play = () => { if (ready && player) player.playVideo(); else wantPlay = true; };
 
-if (card && musicBtn && YOUTUBE_IDS.length) {
-  // Retoma o vídeo e o ponto em que a pessoa estava na página anterior
+function startYouTube() {
+  if (!YOUTUBE_IDS.length) { setOpen(false); musicBtn.hidden = true; return; }
+  card.querySelector('.yt-frame').hidden = false;
+  card.querySelector('.mp3-ui').hidden = true;
+  let player = null;
+  let ready = false;
+  let current = 0;
+  let failures = 0;
   const savedIndex = parseInt(sessionStorage.getItem('ytIndex'), 10);
   if (Number.isInteger(savedIndex) && savedIndex >= 0 && savedIndex < YOUTUBE_IDS.length) current = savedIndex;
 
-  const closedBefore = sessionStorage.getItem('ytClosed') === '1';
-  // No computador o player já aparece aberto; no celular abre pelo botão
-  if (!closedBefore && window.innerWidth > 700) setOpen(true);
+  ctrl.play = () => { if (ready && player) player.playVideo(); else wantPlay = true; };
+  ctrl.pause = () => { if (ready && player) player.pauseVideo(); };
+  ctrl.save = () => {
+    if (player && ready && player.getCurrentTime) {
+      const t = player.getCurrentTime();
+      if (Number.isFinite(t)) sessionStorage.setItem('ytTime', String(t));
+      sessionStorage.setItem('ytIndex', String(current));
+    }
+  };
 
-  const tag = document.createElement('script');
-  tag.src = 'https://www.youtube.com/iframe_api';
-  document.head.appendChild(tag);
+  const next = () => {
+    current = (current + 1) % YOUTUBE_IDS.length;
+    sessionStorage.setItem('ytIndex', String(current));
+    sessionStorage.removeItem('ytTime');
+  };
 
   window.onYouTubeIframeAPIReady = () => {
     const saved = parseFloat(sessionStorage.getItem('ytTime'));
@@ -61,63 +76,136 @@ if (card && musicBtn && YOUTUBE_IDS.length) {
           if (wantPlay && isOpen()) player.playVideo();
         },
         onStateChange: (e) => {
-          // Repete a música quando termina
-          if (e.data === YT.PlayerState.ENDED) { player.seekTo(0); player.playVideo(); }
+          if (e.data === YT.PlayerState.PLAYING) failures = 0;
+          // Quando a música termina, toca a próxima da lista
+          if (e.data === YT.PlayerState.ENDED) {
+            if (YOUTUBE_IDS.length === 1) { player.seekTo(0); player.playVideo(); return; }
+            next();
+            player.loadVideoById(YOUTUBE_IDS[current]);
+          }
         },
         onError: () => {
-          // Vídeo bloqueado ou removido: tenta o próximo da lista
-          sessionStorage.removeItem('ytTime');
-          current += 1;
-          if (current < YOUTUBE_IDS.length) {
-            sessionStorage.setItem('ytIndex', String(current));
-            if (isOpen()) player.loadVideoById(YOUTUBE_IDS[current]);
-            else player.cueVideoById(YOUTUBE_IDS[current]);
-          } else {
-            // Nenhum vídeo da lista toca em sites: esconde o player
+          // Vídeo bloqueado ou removido: pula para o próximo
+          failures += 1;
+          if (failures >= YOUTUBE_IDS.length) {
             sessionStorage.removeItem('ytIndex');
             setOpen(false);
             musicBtn.hidden = true;
+            return;
           }
+          next();
+          if (isOpen()) player.loadVideoById(YOUTUBE_IDS[current]);
+          else player.cueVideoById(YOUTUBE_IDS[current]);
         }
       }
     });
   };
+
+  const tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+}
+
+function startMp3() {
+  const ui = card.querySelector('.mp3-ui');
+  const title = ui.querySelector('.mp3-title');
+  const playBtn = ui.querySelector('.mp3-play');
+  card.querySelector('.yt-frame').hidden = true;
+  ui.hidden = false;
+
+  const audio = new Audio();
+  audio.preload = 'auto';
+  audio.volume = 0.5;
+  let current = 0;
+  let failures = 0;
+  const savedIndex = parseInt(sessionStorage.getItem('mp3Index'), 10);
+  if (Number.isInteger(savedIndex) && savedIndex >= 0 && savedIndex < AUDIO_FILES.length) current = savedIndex;
+  let resumeAt = parseFloat(sessionStorage.getItem('mp3Time'));
+
+  // Nome da música a partir do nome do arquivo
+  const nameOf = (src) => decodeURIComponent(src.split('/').pop().replace(/\.[^.]+$/, '')).replace(/[_-]+/g, ' ').trim();
+
+  const load = (index, autoplay) => {
+    current = (index + AUDIO_FILES.length) % AUDIO_FILES.length;
+    audio.src = AUDIO_FILES[current];
+    title.textContent = nameOf(AUDIO_FILES[current]);
+    sessionStorage.setItem('mp3Index', String(current));
+    if (autoplay) audio.play().catch(() => {});
+  };
+
+  audio.addEventListener('loadedmetadata', () => {
+    // Continua do mesmo ponto ao trocar de página
+    if (Number.isFinite(resumeAt) && resumeAt > 0 && resumeAt < audio.duration) audio.currentTime = resumeAt;
+    resumeAt = NaN;
+  });
+  audio.addEventListener('playing', () => {
+    failures = 0;
+    playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    playBtn.setAttribute('aria-label', 'Pausar');
+  });
+  audio.addEventListener('pause', () => {
+    playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    playBtn.setAttribute('aria-label', 'Tocar');
+  });
+  // Quando a música termina, toca a próxima (e volta para a primeira no fim)
+  audio.addEventListener('ended', () => { sessionStorage.removeItem('mp3Time'); load(current + 1, true); });
+  audio.addEventListener('error', () => {
+    // Arquivo não encontrado: tenta o próximo; se nenhum abrir, usa o YouTube
+    failures += 1;
+    sessionStorage.removeItem('mp3Time');
+    if (failures >= AUDIO_FILES.length) { audio.removeAttribute('src'); startYouTube(); return; }
+    load(current + 1, !audio.paused || wantPlay);
+  });
+
+  ctrl.play = () => { wantPlay = true; audio.play().catch(() => {}); };
+  ctrl.pause = () => audio.pause();
+  ctrl.save = () => {
+    sessionStorage.setItem('mp3Index', String(current));
+    if (Number.isFinite(audio.currentTime)) sessionStorage.setItem('mp3Time', String(audio.currentTime));
+  };
+
+  playBtn.addEventListener('click', () => (audio.paused ? ctrl.play() : ctrl.pause()));
+  ui.querySelector('.mp3-prev').addEventListener('click', () => { sessionStorage.removeItem('mp3Time'); load(current - 1, true); });
+  ui.querySelector('.mp3-next').addEventListener('click', () => { sessionStorage.removeItem('mp3Time'); load(current + 1, true); });
+
+  load(current, false);
+}
+
+if (card && musicBtn && (AUDIO_FILES.length || YOUTUBE_IDS.length)) {
+  const closedBefore = sessionStorage.getItem('ytClosed') === '1';
+  // No computador o player já aparece aberto; no celular abre pelo botão
+  if (!closedBefore && window.innerWidth > 700) setOpen(true);
+
+  if (AUDIO_FILES.length) startMp3(); else startYouTube();
 
   // O navegador só libera som depois do primeiro clique, toque ou tecla
   const events = ['click', 'touchstart', 'keydown'];
   const unlock = (e) => {
     if (e.target.closest && e.target.closest('.music-btn, .yt-player')) return;
     events.forEach((ev) => document.removeEventListener(ev, unlock));
-    if (isOpen()) play();
+    if (isOpen()) ctrl.play();
   };
   events.forEach((ev) => document.addEventListener(ev, unlock));
 
   musicBtn.addEventListener('click', () => {
     if (isOpen()) {
-      if (player && ready) player.pauseVideo();
+      ctrl.pause();
       setOpen(false);
       sessionStorage.setItem('ytClosed', '1');
     } else {
       setOpen(true);
       sessionStorage.setItem('ytClosed', '0');
-      play();
+      ctrl.play();
     }
   });
 
   closeBtn.addEventListener('click', () => {
-    if (player && ready) player.pauseVideo();
+    ctrl.pause();
     setOpen(false);
     sessionStorage.setItem('ytClosed', '1');
   });
 
-  // Continua do mesmo ponto ao trocar de página
-  window.addEventListener('pagehide', () => {
-    if (player && ready && player.getCurrentTime) {
-      const t = player.getCurrentTime();
-      if (Number.isFinite(t)) sessionStorage.setItem('ytTime', String(t));
-      sessionStorage.setItem('ytIndex', String(current));
-    }
-  });
+  window.addEventListener('pagehide', () => ctrl.save());
 } else if (musicBtn) {
   musicBtn.hidden = true;
 }

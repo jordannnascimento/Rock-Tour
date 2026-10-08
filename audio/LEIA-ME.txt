@@ -1,0 +1,6 @@
+Coloque aqui os arquivos de música (mp3) e liste os nomes em js/main.js, na linha:
+const AUDIO_FILES = ['audio/musica-1.mp3', 'audio/musica-2.mp3', 'audio/musica-3.mp3'];
+
+Use nomes simples, sem espaços nem acentos.
+Os arquivos de música desta pasta não vão para o GitHub (veja o arquivo .gitignore).
+Com a lista vazia, o site usa os vídeos do YouTube.
