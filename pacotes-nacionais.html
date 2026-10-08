@@ -22,12 +22,12 @@
       <nav class="nav" id="nav">
         <ul>
         <li><a href="index.html">Início</a></li>
-        <li><a href="a-banda.html">Nossa história</a></li>
-        <li><a href="discografia.html">Mundo Mórmon</a></li>
+        <li><a href="nossa-historia.html">Nossa história</a></li>
+        <li><a href="mundo-mormon.html">Mundo Mórmon</a></li>
         <li><a href="pacotes-internacionais.html">Pacotes Internacionais</a></li>
         <li><a href="pacotes-nacionais.html" class="active">Pacotes Nacionais</a></li>
         <li><a href="parana.html">Paraná</a></li>
-        <li><a href="contato2.html">Contato</a></li>
+        <li><a href="contato.html">Contato</a></li>
         </ul>
       </nav>
       <div class="lang">
@@ -66,27 +66,27 @@
         <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
       </span>
       <div class="circles">
-        <a href="contato2.html" class="circle-item">
+        <a href="contato.html" class="circle-item">
           <span class="circle"><img src="https://97afcb185d.cbaul-cdnwnd.com/6f993fae9f1f40d95bb15cda1f112e9f/200000059-885838966a/foz.jpg?ph=97afcb185d" alt="" loading="lazy" onerror="this.style.visibility='hidden'"></span>
           <h2>FOZ DO IGUAÇU</h2>
           <p>Lugar turistico mais visitado do Brasil</p>
         </a>
-        <a href="contato2.html" class="circle-item">
+        <a href="contato.html" class="circle-item">
           <span class="circle"><img src="img/nacionais/rio-de-janeiro.jpg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"></span>
           <h2>RIO DE JANEIRO</h2>
           <p>Cidade maravilhosa</p>
         </a>
-        <a href="contato2.html" class="circle-item">
+        <a href="contato.html" class="circle-item">
           <span class="circle"><img src="img/nacionais/nordeste.jpg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"></span>
           <h2>NORDESTE</h2>
           <p>Melhores praias do Brasil</p>
         </a>
-        <a href="contato2.html" class="circle-item">
+        <a href="contato.html" class="circle-item">
           <span class="circle"><img src="img/nacionais/sul.jpg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"></span>
           <h2>SUL</h2>
           <p>Desde praias à neve</p>
         </a>
-        <a href="contato2.html" class="circle-item">
+        <a href="contato.html" class="circle-item">
           <span class="circle"><img src="img/nacionais/centro-oeste.jpg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"></span>
           <h2>CENTRO OESTE</h2>
           <p>Diversidade</p>
@@ -110,12 +110,12 @@
         <h4>Menu</h4>
         <ul>
           <li><a href="index.html">Início</a></li>
-          <li><a href="a-banda.html">Nossa história</a></li>
-          <li><a href="discografia.html">Mundo Mórmon</a></li>
+          <li><a href="nossa-historia.html">Nossa história</a></li>
+          <li><a href="mundo-mormon.html">Mundo Mórmon</a></li>
           <li><a href="pacotes-internacionais.html">Pacotes Internacionais</a></li>
           <li><a href="pacotes-nacionais.html">Pacotes Nacionais</a></li>
           <li><a href="parana.html">Paraná</a></li>
-          <li><a href="contato2.html">Contato</a></li>
+          <li><a href="contato.html">Contato</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -146,12 +146,18 @@
     </div>
     <div class="yt-frame"><div id="ytFrame"></div></div>
     <div class="mp3-ui" hidden>
-      <p class="mp3-title"></p>
-      <div class="mp3-controls">
-        <button type="button" class="mp3-prev" aria-label="Música anterior"><i class="fa-solid fa-backward-step"></i></button>
-        <button type="button" class="mp3-play" aria-label="Tocar"><i class="fa-solid fa-play"></i></button>
-        <button type="button" class="mp3-next" aria-label="Próxima música"><i class="fa-solid fa-forward-step"></i></button>
+      <button type="button" class="mp3-play" aria-label="Tocar"><i class="fa-solid fa-play"></i></button>
+      <div class="mp3-info">
+        <span class="mp3-label"><span>Música</span></span>
+        <p class="mp3-title"></p>
       </div>
+      <button type="button" class="mp3-prev" aria-label="Música anterior"><i class="fa-solid fa-backward-step"></i></button>
+      <button type="button" class="mp3-next" aria-label="Próxima música"><i class="fa-solid fa-forward-step"></i></button>
+      <div class="mp3-volume">
+        <button type="button" class="mp3-mute" aria-label="Silenciar"><i class="fa-solid fa-volume-high"></i></button>
+        <input type="range" class="mp3-vol" min="0" max="100" step="1" value="50" aria-label="Volume">
+      </div>
+      <button type="button" class="mp3-close" aria-label="Fechar player"><i class="fa-solid fa-xmark"></i></button>
     </div>
   </div>
   <button class="music-btn" type="button" aria-label="Abrir player de música" aria-expanded="false"><i class="fa-solid fa-music"></i></button>

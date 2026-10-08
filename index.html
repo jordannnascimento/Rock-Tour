@@ -22,12 +22,12 @@
       <nav class="nav" id="nav">
         <ul>
         <li><a href="index.html" class="active">Início</a></li>
-        <li><a href="a-banda.html">Nossa história</a></li>
-        <li><a href="discografia.html">Mundo Mórmon</a></li>
+        <li><a href="nossa-historia.html">Nossa história</a></li>
+        <li><a href="mundo-mormon.html">Mundo Mórmon</a></li>
         <li><a href="pacotes-internacionais.html">Pacotes Internacionais</a></li>
         <li><a href="pacotes-nacionais.html">Pacotes Nacionais</a></li>
         <li><a href="parana.html">Paraná</a></li>
-        <li><a href="contato2.html">Contato</a></li>
+        <li><a href="contato.html">Contato</a></li>
         </ul>
       </nav>
       <div class="lang">
@@ -88,9 +88,9 @@
       <h1><strong>DEIXE SEU CONTATO</strong></h1>
       <p>Para ficar por dentro de todas as novidades e promoções, deixe seu email para entrarmos em contato.</p>
       <p>Responderemos com a máxima rapidez.</p>
-      <p style="margin-top: 28px;"><a href="contato2.html" class="btn">NOSSO CONTATO</a></p>
+      <p style="margin-top: 28px;"><a href="contato.html" class="btn">NOSSO CONTATO</a></p>
 
-      <form class="contact-form" action="#" method="post">
+      <form class="contact-form" action="#" method="post" novalidate>
         <label><span>Nome</span>
           <input type="text" name="nome" required>
         </label>
@@ -100,7 +100,9 @@
         <label><span>Mensagem</span>
           <textarea name="mensagem" required></textarea>
         </label>
+        <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button type="submit" class="btn">Enviar</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
       </form>
     </div>
   </section>
@@ -115,12 +117,12 @@
         <h4>Menu</h4>
         <ul>
           <li><a href="index.html">Início</a></li>
-          <li><a href="a-banda.html">Nossa história</a></li>
-          <li><a href="discografia.html">Mundo Mórmon</a></li>
+          <li><a href="nossa-historia.html">Nossa história</a></li>
+          <li><a href="mundo-mormon.html">Mundo Mórmon</a></li>
           <li><a href="pacotes-internacionais.html">Pacotes Internacionais</a></li>
           <li><a href="pacotes-nacionais.html">Pacotes Nacionais</a></li>
           <li><a href="parana.html">Paraná</a></li>
-          <li><a href="contato2.html">Contato</a></li>
+          <li><a href="contato.html">Contato</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -151,12 +153,18 @@
     </div>
     <div class="yt-frame"><div id="ytFrame"></div></div>
     <div class="mp3-ui" hidden>
-      <p class="mp3-title"></p>
-      <div class="mp3-controls">
-        <button type="button" class="mp3-prev" aria-label="Música anterior"><i class="fa-solid fa-backward-step"></i></button>
-        <button type="button" class="mp3-play" aria-label="Tocar"><i class="fa-solid fa-play"></i></button>
-        <button type="button" class="mp3-next" aria-label="Próxima música"><i class="fa-solid fa-forward-step"></i></button>
+      <button type="button" class="mp3-play" aria-label="Tocar"><i class="fa-solid fa-play"></i></button>
+      <div class="mp3-info">
+        <span class="mp3-label"><span>Música</span></span>
+        <p class="mp3-title"></p>
       </div>
+      <button type="button" class="mp3-prev" aria-label="Música anterior"><i class="fa-solid fa-backward-step"></i></button>
+      <button type="button" class="mp3-next" aria-label="Próxima música"><i class="fa-solid fa-forward-step"></i></button>
+      <div class="mp3-volume">
+        <button type="button" class="mp3-mute" aria-label="Silenciar"><i class="fa-solid fa-volume-high"></i></button>
+        <input type="range" class="mp3-vol" min="0" max="100" step="1" value="50" aria-label="Volume">
+      </div>
+      <button type="button" class="mp3-close" aria-label="Fechar player"><i class="fa-solid fa-xmark"></i></button>
     </div>
   </div>
   <button class="music-btn" type="button" aria-label="Abrir player de música" aria-expanded="false"><i class="fa-solid fa-music"></i></button>

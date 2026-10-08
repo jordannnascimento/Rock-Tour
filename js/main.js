@@ -15,17 +15,24 @@ document.querySelectorAll('.year').forEach((el) => {
 });
 
 // Player de música
-// 1) Arquivos mp3 na pasta audio/. Se a lista tiver arquivos, o site usa eles.
-//    Exemplo: const AUDIO_FILES = ['audio/musica-1.mp3', 'audio/musica-2.mp3'];
-// 2) Se a lista de mp3 estiver vazia (ou nenhum arquivo abrir), o site usa os vídeos do YouTube.
-//    O código do vídeo é o que vem depois de "watch?v=" ou "youtu.be/" no link.
+// 1) Músicas em mp3 na pasta audio/ chamadas musica-1.mp3, musica-2.mp3, musica-3.mp3...
+//    O site encontra esses arquivos sozinho (até 20) e toca todos em sequência, em loop.
+// 2) Outros arquivos podem ser listados aqui, com qualquer nome. Eles tocam depois dos musica-N.
+// 3) Se não houver nenhum mp3, o site usa os vídeos do YouTube.
 const AUDIO_FILES = [];
 const YOUTUBE_IDS = ['nSQzXOgIQjM', 'CD-E-LDc384'];
 
 const card = document.getElementById('ytPlayer');
 const musicBtn = document.querySelector('.music-btn');
-const closeBtn = document.querySelector('.yt-close');
 let wantPlay = false;
+const RESUME = (() => {
+  try {
+    const nav = performance.getEntriesByType('navigation')[0];
+    if (nav && nav.type === 'reload') return false;
+    return !!document.referrer && new URL(document.referrer).origin === location.origin;
+  } catch (e) { return false; }
+})();
+const wasClosed = () => RESUME && sessionStorage.getItem('ytClosed') === '1';
 // Comandos do player que estiver ativo (mp3 ou YouTube)
 const ctrl = { play() { wantPlay = true; }, pause() {}, save() {} };
 
@@ -38,13 +45,15 @@ const setOpen = (open) => {
 
 function startYouTube() {
   if (!YOUTUBE_IDS.length) { setOpen(false); musicBtn.hidden = true; return; }
+  if (!wasClosed() && window.innerWidth > 700) setOpen(true);
+  card.classList.remove('mini');
   card.querySelector('.yt-frame').hidden = false;
   card.querySelector('.mp3-ui').hidden = true;
   let player = null;
   let ready = false;
   let current = 0;
   let failures = 0;
-  const savedIndex = parseInt(sessionStorage.getItem('ytIndex'), 10);
+  const savedIndex = RESUME ? parseInt(sessionStorage.getItem('ytIndex'), 10) : NaN;
   if (Number.isInteger(savedIndex) && savedIndex >= 0 && savedIndex < YOUTUBE_IDS.length) current = savedIndex;
 
   ctrl.play = () => { if (ready && player) player.playVideo(); else wantPlay = true; };
@@ -64,7 +73,7 @@ function startYouTube() {
   };
 
   window.onYouTubeIframeAPIReady = () => {
-    const saved = parseFloat(sessionStorage.getItem('ytTime'));
+    const saved = RESUME ? parseFloat(sessionStorage.getItem('ytTime')) : NaN;
     const start = Number.isFinite(saved) && saved > 0 ? Math.floor(saved) : 0;
     player = new YT.Player('ytFrame', {
       videoId: YOUTUBE_IDS[current],
@@ -106,30 +115,80 @@ function startYouTube() {
   document.head.appendChild(tag);
 }
 
-function startMp3() {
+// Procura audio/musica-1.mp3, musica-2.mp3... até não achar o próximo
+async function findAudioFiles() {
+  const found = [];
+  for (let n = 1; n <= 20; n++) {
+    const src = `audio/musica-${n}.mp3`;
+    try {
+      const r = await fetch(src, { method: 'HEAD', cache: 'no-store' });
+      if (!r.ok) break;
+      found.push(src);
+    } catch (e) { break; }
+  }
+  return found;
+}
+
+function startMp3(PLAYLIST) {
   const ui = card.querySelector('.mp3-ui');
   const title = ui.querySelector('.mp3-title');
   const playBtn = ui.querySelector('.mp3-play');
   card.querySelector('.yt-frame').hidden = true;
+  card.classList.add('mini');
   ui.hidden = false;
 
   const audio = new Audio();
   audio.preload = 'auto';
-  audio.volume = 0.5;
+
+  // Volume: botão de silenciar e barra deslizante (a escolha fica salva entre as páginas)
+  const volBtn = ui.querySelector('.mp3-mute');
+  const volRange = ui.querySelector('.mp3-vol');
+  const store = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+  const read = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  const savedVol = parseFloat(read('volume'));
+  audio.volume = Number.isFinite(savedVol) ? Math.min(Math.max(savedVol, 0), 1) : 0.5;
+  audio.muted = read('muted') === '1';
+  volRange.value = Math.round(audio.volume * 100);
+  const updateVolume = () => {
+    const v = audio.muted ? 0 : audio.volume;
+    const icon = v === 0 ? 'fa-volume-xmark' : v < 0.5 ? 'fa-volume-low' : 'fa-volume-high';
+    volBtn.innerHTML = `<i class="fa-solid ${icon}"></i>`;
+    volBtn.setAttribute('aria-label', audio.muted ? 'Ativar som' : 'Silenciar');
+    volRange.style.setProperty('--fill', `${Math.round(v * 100)}%`);
+    store('volume', String(audio.volume));
+    store('muted', audio.muted ? '1' : '0');
+  };
+  volRange.addEventListener('input', () => {
+    audio.volume = volRange.value / 100;
+    audio.muted = audio.volume === 0;
+    updateVolume();
+  });
+  volBtn.addEventListener('click', () => {
+    audio.muted = !audio.muted;
+    if (!audio.muted && audio.volume === 0) { audio.volume = 0.5; volRange.value = 50; }
+    updateVolume();
+  });
+  updateVolume();
   let current = 0;
   let failures = 0;
-  const savedIndex = parseInt(sessionStorage.getItem('mp3Index'), 10);
-  if (Number.isInteger(savedIndex) && savedIndex >= 0 && savedIndex < AUDIO_FILES.length) current = savedIndex;
-  let resumeAt = parseFloat(sessionStorage.getItem('mp3Time'));
+  let resumeAt = NaN;
+  if (RESUME) {
+    const savedSrc = sessionStorage.getItem('mp3Src');
+    const i = PLAYLIST.indexOf(savedSrc);
+    if (i >= 0) { current = i; resumeAt = parseFloat(sessionStorage.getItem('mp3Time')); }
+  }
 
   // Nome da música a partir do nome do arquivo
-  const nameOf = (src) => decodeURIComponent(src.split('/').pop().replace(/\.[^.]+$/, '')).replace(/[_-]+/g, ' ').trim();
+  const nameOf = (src) => {
+    const base = decodeURIComponent(src.split('/').pop().replace(/\.[^.]+$/, ''));
+    const n = base.match(/^musica[-_ ]?(\d+)$/i);
+    return n ? `RockTour Rádio · ${n[1]}` : base.replace(/[_-]+/g, ' ').trim();
+  };
 
   const load = (index, autoplay) => {
-    current = (index + AUDIO_FILES.length) % AUDIO_FILES.length;
-    audio.src = AUDIO_FILES[current];
-    title.textContent = nameOf(AUDIO_FILES[current]);
-    sessionStorage.setItem('mp3Index', String(current));
+    current = (index + PLAYLIST.length) % PLAYLIST.length;
+    audio.src = PLAYLIST[current];
+    title.textContent = nameOf(PLAYLIST[current]);
     if (autoplay) audio.play().catch(() => {});
   };
 
@@ -153,14 +212,14 @@ function startMp3() {
     // Arquivo não encontrado: tenta o próximo; se nenhum abrir, usa o YouTube
     failures += 1;
     sessionStorage.removeItem('mp3Time');
-    if (failures >= AUDIO_FILES.length) { audio.removeAttribute('src'); startYouTube(); return; }
+    if (failures >= PLAYLIST.length) { audio.removeAttribute('src'); startYouTube(); return; }
     load(current + 1, !audio.paused || wantPlay);
   });
 
   ctrl.play = () => { wantPlay = true; audio.play().catch(() => {}); };
   ctrl.pause = () => audio.pause();
   ctrl.save = () => {
-    sessionStorage.setItem('mp3Index', String(current));
+    sessionStorage.setItem('mp3Src', PLAYLIST[current]);
     if (Number.isFinite(audio.currentTime)) sessionStorage.setItem('mp3Time', String(audio.currentTime));
   };
 
@@ -169,17 +228,22 @@ function startMp3() {
   ui.querySelector('.mp3-next').addEventListener('click', () => { sessionStorage.removeItem('mp3Time'); load(current + 1, true); });
 
   load(current, false);
+  // Abre o player e tenta tocar assim que a página abre
+  if (!wasClosed()) setOpen(true);
+  audio.addEventListener('playing', () => playBtn.classList.remove('waiting'));
+  if (isOpen() || wantPlay) {
+    audio.play().then(() => { wantPlay = true; }).catch(() => playBtn.classList.add('waiting'));
+  }
 }
 
-if (card && musicBtn && (AUDIO_FILES.length || YOUTUBE_IDS.length)) {
-  const closedBefore = sessionStorage.getItem('ytClosed') === '1';
-  // No computador o player já aparece aberto; no celular abre pelo botão
-  if (!closedBefore && window.innerWidth > 700) setOpen(true);
+if (card && musicBtn) {
+  findAudioFiles().then((detected) => {
+    const playlist = [...detected, ...AUDIO_FILES.filter((f) => !detected.includes(f))];
+    if (playlist.length) startMp3(playlist); else startYouTube();
+  });
 
-  if (AUDIO_FILES.length) startMp3(); else startYouTube();
-
-  // O navegador só libera som depois do primeiro clique, toque ou tecla
-  const events = ['click', 'touchstart', 'keydown'];
+  // Se o navegador bloquear o som ao abrir, a música começa no primeiro clique, toque ou tecla
+  const events = ['pointerdown', 'touchstart', 'keydown'];
   const unlock = (e) => {
     if (e.target.closest && e.target.closest('.music-btn, .yt-player')) return;
     events.forEach((ev) => document.removeEventListener(ev, unlock));
@@ -199,15 +263,40 @@ if (card && musicBtn && (AUDIO_FILES.length || YOUTUBE_IDS.length)) {
     }
   });
 
-  closeBtn.addEventListener('click', () => {
+  card.querySelectorAll('.yt-close, .mp3-close').forEach((b) => b.addEventListener('click', () => {
     ctrl.pause();
     setOpen(false);
     sessionStorage.setItem('ytClosed', '1');
-  });
+  }));
 
   window.addEventListener('pagehide', () => ctrl.save());
 } else if (musicBtn) {
   musicBtn.hidden = true;
+}
+
+// WhatsApp: abre a conversa já com uma mensagem pronta no idioma do site
+const WHATS_NUMBER = '13853437555';
+const WHATS_MSG = {
+  pt: 'Olá! Vim pelo site da Rock Tour e gostaria de mais informações.',
+  en: "Hi! I found Rock Tour's website and would like more information.",
+  es: '¡Hola! Vengo del sitio web de Rock Tour y me gustaría recibir más información.',
+  fr: "Bonjour ! Je viens du site de Rock Tour et j'aimerais plus d'informations.",
+  ja: 'こんにちは！Rock Tourのウェブサイトを見て、詳しい情報を知りたいです。',
+  de: 'Hallo! Ich komme von der Rock-Tour-Website und hätte gern mehr Informationen.',
+  it: 'Ciao! Vengo dal sito di Rock Tour e vorrei maggiori informazioni.',
+  he: 'שלום! הגעתי מהאתר של Rock Tour ואשמח לקבל מידע נוסף.',
+  zh: '您好！我是从Rock Tour网站过来的，想了解更多信息。',
+  sv: 'Hej! Jag kommer från Rock Tours webbplats och vill gärna ha mer information.',
+  no: 'Hei! Jeg kommer fra Rock Tours nettside og vil gjerne ha mer informasjon.',
+  fi: 'Hei! Tulin Rock Tourin verkkosivuilta ja haluaisin lisätietoja.',
+  da: 'Hej! Jeg kommer fra Rock Tours hjemmeside og vil gerne have mere information.',
+  el: 'Γεια σας! Ήρθα από την ιστοσελίδα της Rock Tour και θα ήθελα περισσότερες πληροφορίες.'
+};
+function updateWhatsLinks(lang) {
+  const text = WHATS_MSG[lang] || WHATS_MSG.pt;
+  document.querySelectorAll(`a[href^="https://wa.me/${WHATS_NUMBER}"]`).forEach((a) => {
+    a.href = `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(text)}`;
+  });
 }
 
 // Idiomas do site
@@ -255,6 +344,7 @@ function setLang(lang) {
     b.classList.toggle('active', b.dataset.lang === lang);
   });
   try { localStorage.setItem('lang', lang); } catch (e) {}
+  if (typeof updateWhatsLinks === 'function') updateWhatsLinks(lang);
 }
 
 if (langBtn && langMenu) {
@@ -279,16 +369,78 @@ let savedLang = 'pt';
 try { savedLang = localStorage.getItem('lang') || 'pt'; } catch (e) {}
 if (savedLang !== 'pt') setLang(savedLang);
 
-// Formulário da página inicial: abre o e-mail já preenchido para a Rock Tour
-const form = document.querySelector('.contact-form');
-if (form) {
+// Formulário da página inicial: envia direto para o e-mail da Rock Tour pelo serviço FormSubmit
+// Na primeira vez, o FormSubmit manda um e-mail de ativação para este endereço. É só clicar em "Activate Form".
+const FORM_EMAIL = 'agenciarocktour@hotmail.com';
+const FORM_MSG = {
+  pt: ['Enviando...', 'Mensagem enviada! Responderemos em breve.', 'Não foi possível enviar agora. Escreva para'],
+  en: ['Sending...', 'Message sent! We will reply soon.', 'Could not send right now. Please write to'],
+  es: ['Enviando...', '¡Mensaje enviado! Responderemos pronto.', 'No fue posible enviar ahora. Escribe a'],
+  fr: ['Envoi en cours...', 'Message envoyé ! Nous vous répondrons bientôt.', "Impossible d'envoyer pour le moment. Écrivez à"],
+  ja: ['送信中...', 'メッセージを送信しました。折り返しご連絡いたします。', '送信できませんでした。こちらまでご連絡ください：'],
+  de: ['Wird gesendet...', 'Nachricht gesendet! Wir antworten bald.', 'Senden derzeit nicht möglich. Schreiben Sie an'],
+  it: ['Invio in corso...', 'Messaggio inviato! Ti risponderemo presto.', 'Non è stato possibile inviare. Scrivi a'],
+  he: ['שולח...', 'ההודעה נשלחה! נחזור אליכם בקרוב.', 'לא ניתן לשלוח כרגע. כתבו אל'],
+  zh: ['发送中...', '消息已发送！我们会尽快回复。', '暂时无法发送，请发邮件至'],
+  sv: ['Skickar...', 'Meddelandet har skickats! Vi svarar snart.', 'Det gick inte att skicka just nu. Skriv till'],
+  no: ['Sender...', 'Meldingen er sendt! Vi svarer snart.', 'Kunne ikke sende nå. Skriv til'],
+  fi: ['Lähetetään...', 'Viesti lähetetty! Vastaamme pian.', 'Lähettäminen ei onnistunut. Kirjoita osoitteeseen'],
+  da: ['Sender...', 'Beskeden er sendt! Vi svarer snart.', 'Kunne ikke sende lige nu. Skriv til'],
+  el: ['Αποστολή...', 'Το μήνυμα στάλθηκε! Θα απαντήσουμε σύντομα.', 'Δεν ήταν δυνατή η αποστολή. Γράψτε στο']
+};
+
+document.querySelectorAll('.contact-form').forEach((form) => {
+  const status = form.querySelector('.form-status');
+  const button = form.querySelector('button[type="submit"]');
+  const msg = () => {
+    let lang = 'pt';
+    try { lang = localStorage.getItem('lang') || 'pt'; } catch (e) {}
+    return FORM_MSG[lang] || FORM_MSG.pt;
+  };
+  const showError = () => {
+    status.className = 'form-status err';
+    status.innerHTML = `${msg()[2]} <a href="mailto:${FORM_EMAIL}">${FORM_EMAIL}</a>`;
+  };
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    if (!form.reportValidity()) return;
     const nome = form.elements.nome.value.trim();
     const email = form.elements.email.value.trim();
-    const msg = form.elements.mensagem.value.trim();
-    const subject = `Contato pelo site: ${nome}`;
-    const body = `Nome: ${nome}\nE-mail: ${email}\n\n${msg}`;
-    window.location.href = `mailto:agenciarocktour@hotmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mensagem = form.elements.mensagem.value.trim();
+
+    button.disabled = true;
+    status.className = 'form-status';
+    status.textContent = msg()[0];
+
+    fetch(`https://formsubmit.co/ajax/${FORM_EMAIL}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        Nome: nome,
+        email: email,
+        Mensagem: mensagem,
+        _subject: `Contato pelo site: ${nome}`,
+        _template: 'table',
+        _honey: form.elements._honey.value
+      })
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        if (String(data.success) === 'true') {
+          status.className = 'form-status ok';
+          status.textContent = msg()[1];
+          form.reset();
+        } else if (/activat/i.test(data.message || '')) {
+          // Só acontece antes de ativar o formulário pela primeira vez
+          status.className = 'form-status err';
+          status.textContent = `Formulário aguardando ativação: abra o e-mail do FormSubmit enviado para ${FORM_EMAIL} e clique em "Activate Form".`;
+        } else {
+          showError();
+        }
+      })
+      .catch(showError)
+      .finally(() => { button.disabled = false; });
   });
-}
+});
+updateWhatsLinks(savedLang);

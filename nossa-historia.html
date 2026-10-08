@@ -22,12 +22,12 @@
       <nav class="nav" id="nav">
         <ul>
         <li><a href="index.html">Início</a></li>
-        <li><a href="a-banda.html" class="active">Nossa história</a></li>
-        <li><a href="discografia.html">Mundo Mórmon</a></li>
+        <li><a href="nossa-historia.html" class="active">Nossa história</a></li>
+        <li><a href="mundo-mormon.html">Mundo Mórmon</a></li>
         <li><a href="pacotes-internacionais.html">Pacotes Internacionais</a></li>
         <li><a href="pacotes-nacionais.html">Pacotes Nacionais</a></li>
         <li><a href="parana.html">Paraná</a></li>
-        <li><a href="contato2.html">Contato</a></li>
+        <li><a href="contato.html">Contato</a></li>
         </ul>
       </nav>
       <div class="lang">
@@ -123,12 +123,12 @@
         <h4>Menu</h4>
         <ul>
           <li><a href="index.html">Início</a></li>
-          <li><a href="a-banda.html">Nossa história</a></li>
-          <li><a href="discografia.html">Mundo Mórmon</a></li>
+          <li><a href="nossa-historia.html">Nossa história</a></li>
+          <li><a href="mundo-mormon.html">Mundo Mórmon</a></li>
           <li><a href="pacotes-internacionais.html">Pacotes Internacionais</a></li>
           <li><a href="pacotes-nacionais.html">Pacotes Nacionais</a></li>
           <li><a href="parana.html">Paraná</a></li>
-          <li><a href="contato2.html">Contato</a></li>
+          <li><a href="contato.html">Contato</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -159,12 +159,18 @@
     </div>
     <div class="yt-frame"><div id="ytFrame"></div></div>
     <div class="mp3-ui" hidden>
-      <p class="mp3-title"></p>
-      <div class="mp3-controls">
-        <button type="button" class="mp3-prev" aria-label="Música anterior"><i class="fa-solid fa-backward-step"></i></button>
-        <button type="button" class="mp3-play" aria-label="Tocar"><i class="fa-solid fa-play"></i></button>
-        <button type="button" class="mp3-next" aria-label="Próxima música"><i class="fa-solid fa-forward-step"></i></button>
+      <button type="button" class="mp3-play" aria-label="Tocar"><i class="fa-solid fa-play"></i></button>
+      <div class="mp3-info">
+        <span class="mp3-label"><span>Música</span></span>
+        <p class="mp3-title"></p>
       </div>
+      <button type="button" class="mp3-prev" aria-label="Música anterior"><i class="fa-solid fa-backward-step"></i></button>
+      <button type="button" class="mp3-next" aria-label="Próxima música"><i class="fa-solid fa-forward-step"></i></button>
+      <div class="mp3-volume">
+        <button type="button" class="mp3-mute" aria-label="Silenciar"><i class="fa-solid fa-volume-high"></i></button>
+        <input type="range" class="mp3-vol" min="0" max="100" step="1" value="50" aria-label="Volume">
+      </div>
+      <button type="button" class="mp3-close" aria-label="Fechar player"><i class="fa-solid fa-xmark"></i></button>
     </div>
   </div>
   <button class="music-btn" type="button" aria-label="Abrir player de música" aria-expanded="false"><i class="fa-solid fa-music"></i></button>

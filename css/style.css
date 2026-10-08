@@ -236,6 +236,12 @@ a { color: inherit; }
 }
 .contact-form textarea { min-height: 140px; resize: vertical; }
 .contact-form .btn { justify-self: start; }
+.contact-form .btn:disabled { opacity: 0.6; cursor: wait; }
+.form-honey { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.form-status { min-height: 1.5em; font-weight: 600; }
+.form-status.ok { color: #b8f5c8; }
+.form-status.err { color: #ffd2cc; }
+.form-status a { color: #fff; }
 
 /* Pacotes em círculos */
 .chevron { display: block; width: 28px; margin: -40px auto 60px; color: #888; }
@@ -359,6 +365,35 @@ a { color: inherit; }
   justify-content: center;
   font-size: 20px;
 }
+
+/* Contato: botão de WhatsApp e formulário */
+.contact-whats { text-align: center; margin-top: 32px; padding: 0 20px; }
+.btn-whats {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25d366;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+}
+.btn-whats i { font-size: 22px; }
+.btn-whats:hover { background: #1ebe5a; }
+.section-form { padding-top: 0; }
+.form-title { text-align: center; font-size: 26px; color: #222; }
+.contact-form.light { margin-top: 24px; }
+.contact-form.light label { color: #333; }
+.contact-form.light input,
+.contact-form.light textarea { background: #fff; border-color: #ccc; color: #333; }
+.contact-form.light input:focus,
+.contact-form.light textarea:focus { border-color: #333; outline: none; }
+.contact-form.light .form-status.ok { color: #1a7f37; }
+.contact-form.light .form-status.err { color: #c62828; }
+.contact-form.light .form-status a { color: #c62828; }
 
 /* Texto em coluna única (Nossa história e Mundo Mórmon) */
 .narrow { max-width: 760px; margin: 0 auto; padding: 0 20px; }
@@ -497,29 +532,73 @@ a { color: inherit; }
 .yt-frame { height: 200px; }
 .yt-frame iframe { width: 100%; height: 100%; display: block; border: 0; }
 .yt-frame[hidden], .mp3-ui[hidden] { display: none; }
-.mp3-ui { padding: 6px 16px 18px; color: #fff; }
-.mp3-title {
+/* Player de mp3 compacto, ao lado do botão de música */
+.yt-player.mini {
+  left: 84px;
+  bottom: 24px;
+  width: auto;
+  max-width: min(460px, calc(100vw - 180px));
+  border-radius: 30px;
+}
+.yt-player.mini .yt-head { display: none; }
+.mp3-ui {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px 4px 4px;
+  color: #fff;
+}
+.mp3-ui button {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
   font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mp3-ui button:hover { background: #2e2e2e; }
+.mp3-ui .mp3-play { width: 40px; height: 40px; background: #fff; color: #111; font-size: 15px; }
+.mp3-ui .mp3-play:hover { background: #e6e6e6; }
+/* Pisca enquanto o navegador espera o primeiro clique para liberar o som */
+.mp3-ui .mp3-play.waiting { animation: pulse 1.4s ease-in-out infinite; }
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6); }
+  50% { box-shadow: 0 0 0 8px rgba(255, 255, 255, 0); }
+}
+@media (prefers-reduced-motion: reduce) { .mp3-ui .mp3-play.waiting { animation: none; } }
+.mp3-ui .mp3-close { color: #aaa; }
+.mp3-volume { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; }
+.mp3-vol {
+  --fill: 50%;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 72px;
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(to right, #fff var(--fill), #555 var(--fill));
+  cursor: pointer;
+  margin: 0 6px 0 2px;
+}
+[dir="rtl"] .mp3-vol { background: linear-gradient(to left, #fff var(--fill), #555 var(--fill)); }
+.mp3-vol::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 0; }
+.mp3-vol::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 0; }
+.mp3-vol:focus-visible { outline: 2px solid #25d366; outline-offset: 4px; }
+.mp3-info { min-width: 0; flex: 1 1 auto; padding: 0 4px; line-height: 1.25; }
+.mp3-label { display: block; font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
+.mp3-title {
+  font-size: 13px;
   font-weight: 600;
-  margin-bottom: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 170px;
 }
-.mp3-controls { display: flex; justify-content: center; gap: 14px; }
-.mp3-controls button {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 0;
-  background: #2a2a2a;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-}
-.mp3-controls .mp3-play { background: #fff; color: #111; }
-.mp3-controls button:hover { background: #3a3a3a; }
-.mp3-controls .mp3-play:hover { background: #e6e6e6; }
 
 a:focus-visible, button:focus-visible { outline: 3px solid #25d366; outline-offset: 3px; }
 
@@ -572,6 +651,10 @@ a:focus-visible, button:focus-visible { outline: 3px solid #25d366; outline-offs
   .whatsapp-float i { font-size: 28px; }
   .music-btn { width: 44px; height: 44px; left: 16px; bottom: 20px; }
   .yt-player { left: 16px; bottom: 76px; width: calc(100vw - 32px); }
+  .yt-player.mini { left: 68px; bottom: 20px; width: auto; max-width: calc(100vw - 148px); }
+  .mp3-ui .mp3-prev { display: none; }
+  .mp3-vol { display: none; }
+  .mp3-title { max-width: 110px; }
   .gallery figure { width: 100%; }
   .circle-item { width: 100%; }
   .footer-inner { grid-template-columns: 1fr; }

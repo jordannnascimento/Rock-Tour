@@ -22,12 +22,12 @@
       <nav class="nav" id="nav">
         <ul>
         <li><a href="index.html">Início</a></li>
-        <li><a href="a-banda.html">Nossa história</a></li>
-        <li><a href="discografia.html">Mundo Mórmon</a></li>
+        <li><a href="nossa-historia.html">Nossa história</a></li>
+        <li><a href="mundo-mormon.html">Mundo Mórmon</a></li>
         <li><a href="pacotes-internacionais.html">Pacotes Internacionais</a></li>
         <li><a href="pacotes-nacionais.html">Pacotes Nacionais</a></li>
         <li><a href="parana.html">Paraná</a></li>
-        <li><a href="contato2.html" class="active">Contato</a></li>
+        <li><a href="contato.html" class="active">Contato</a></li>
         </ul>
       </nav>
       <div class="lang">
@@ -67,6 +67,29 @@
       <a href="https://www.facebook.com/rocktouragencia/" target="_blank" rel="noopener"><span class="icon"><i class="fa-brands fa-facebook-f"></i></span><span>Facebook</span></a>
       <a href="#instagram" target="_blank" rel="noopener"><span class="icon"><i class="fa-brands fa-instagram"></i></span><span>Instagram</span></a>
     </div>
+    <div class="contact-whats">
+      <a href="https://wa.me/13853437555" class="btn-whats" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i><span>Enviar mensagem no WhatsApp</span></a>
+    </div>
+  </section>
+
+  <section class="section section-form">
+    <div class="narrow">
+      <h2 class="form-title">Envie sua mensagem</h2>
+      <form class="contact-form light" action="#" method="post" novalidate>
+        <label><span>Nome</span>
+          <input type="text" name="nome" required>
+        </label>
+        <label><span>E-mail</span>
+          <input type="email" name="email" required>
+        </label>
+        <label><span>Mensagem</span>
+          <textarea name="mensagem" required></textarea>
+        </label>
+        <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" class="btn btn-dark">Enviar</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
   </section>
 
   <footer class="site-footer">
@@ -79,12 +102,12 @@
         <h4>Menu</h4>
         <ul>
           <li><a href="index.html">Início</a></li>
-          <li><a href="a-banda.html">Nossa história</a></li>
-          <li><a href="discografia.html">Mundo Mórmon</a></li>
+          <li><a href="nossa-historia.html">Nossa história</a></li>
+          <li><a href="mundo-mormon.html">Mundo Mórmon</a></li>
           <li><a href="pacotes-internacionais.html">Pacotes Internacionais</a></li>
           <li><a href="pacotes-nacionais.html">Pacotes Nacionais</a></li>
           <li><a href="parana.html">Paraná</a></li>
-          <li><a href="contato2.html">Contato</a></li>
+          <li><a href="contato.html">Contato</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -115,12 +138,18 @@
     </div>
     <div class="yt-frame"><div id="ytFrame"></div></div>
     <div class="mp3-ui" hidden>
-      <p class="mp3-title"></p>
-      <div class="mp3-controls">
-        <button type="button" class="mp3-prev" aria-label="Música anterior"><i class="fa-solid fa-backward-step"></i></button>
-        <button type="button" class="mp3-play" aria-label="Tocar"><i class="fa-solid fa-play"></i></button>
-        <button type="button" class="mp3-next" aria-label="Próxima música"><i class="fa-solid fa-forward-step"></i></button>
+      <button type="button" class="mp3-play" aria-label="Tocar"><i class="fa-solid fa-play"></i></button>
+      <div class="mp3-info">
+        <span class="mp3-label"><span>Música</span></span>
+        <p class="mp3-title"></p>
       </div>
+      <button type="button" class="mp3-prev" aria-label="Música anterior"><i class="fa-solid fa-backward-step"></i></button>
+      <button type="button" class="mp3-next" aria-label="Próxima música"><i class="fa-solid fa-forward-step"></i></button>
+      <div class="mp3-volume">
+        <button type="button" class="mp3-mute" aria-label="Silenciar"><i class="fa-solid fa-volume-high"></i></button>
+        <input type="range" class="mp3-vol" min="0" max="100" step="1" value="50" aria-label="Volume">
+      </div>
+      <button type="button" class="mp3-close" aria-label="Fechar player"><i class="fa-solid fa-xmark"></i></button>
     </div>
   </div>
   <button class="music-btn" type="button" aria-label="Abrir player de música" aria-expanded="false"><i class="fa-solid fa-music"></i></button>

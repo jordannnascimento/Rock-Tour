@@ -1364,5 +1364,35 @@ const I18N = {
   "fi": "<strong>OPASTUS:</strong> matkailuministeriön valtuuttamat monikieliset oppaat.",
   "da": "<strong>GUIDEDE TURE:</strong> flersprogede guider godkendt af turistministeriet.",
   "el": "<strong>ΞΕΝΑΓΗΣΗ:</strong> πολύγλωσσοι ξεναγοί πιστοποιημένοι από το Υπουργείο Τουρισμού."
+ },
+ "Envie sua mensagem": {
+  "en": "Send us a message",
+  "es": "Envíanos un mensaje",
+  "fr": "Envoyez-nous un message",
+  "ja": "メッセージを送る",
+  "de": "Schreiben Sie uns",
+  "it": "Inviaci un messaggio",
+  "he": "שלחו לנו הודעה",
+  "zh": "给我们留言",
+  "sv": "Skicka ett meddelande",
+  "no": "Send oss en melding",
+  "fi": "Lähetä meille viesti",
+  "da": "Send os en besked",
+  "el": "Στείλτε μας μήνυμα"
+ },
+ "Enviar mensagem no WhatsApp": {
+  "en": "Message us on WhatsApp",
+  "es": "Enviar mensaje por WhatsApp",
+  "fr": "Envoyer un message sur WhatsApp",
+  "ja": "WhatsAppでメッセージを送る",
+  "de": "Nachricht per WhatsApp senden",
+  "it": "Invia un messaggio su WhatsApp",
+  "he": "שלחו הודעה בוואטסאפ",
+  "zh": "通过WhatsApp发送消息",
+  "sv": "Skicka meddelande på WhatsApp",
+  "no": "Send melding på WhatsApp",
+  "fi": "Lähetä viesti WhatsAppissa",
+  "da": "Send besked på WhatsApp",
+  "el": "Στείλτε μήνυμα στο WhatsApp"
  }
 };
