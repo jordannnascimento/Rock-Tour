@@ -401,9 +401,10 @@ let savedLang = 'pt';
 try { savedLang = localStorage.getItem('lang') || 'pt'; } catch (e) {}
 if (savedLang !== 'pt') setLang(savedLang);
 
-// Formulário da página inicial: envia direto para o e-mail da Rock Tour pelo serviço FormSubmit
-// Na primeira vez, o FormSubmit manda um e-mail de ativação para este endereço. É só clicar em "Activate Form".
+// Formulários do site: enviam direto para o e-mail da Rock Tour pelo serviço Web3Forms
+// As mensagens chegam no e-mail usado para criar a chave de acesso no Web3Forms.
 const FORM_EMAIL = 'agenciarocktour@hotmail.com';
+const WEB3FORMS_KEY = '1f1d3935-9b75-430f-8585-50b59f714e13';
 const FORM_MSG = {
   pt: ['Enviando...', 'Mensagem enviada! Responderemos em breve.', 'Não foi possível enviar agora. Escreva para'],
   en: ['Sending...', 'Message sent! We will reply soon.', 'Could not send right now. Please write to'],
@@ -438,6 +439,7 @@ root.querySelectorAll('.contact-form').forEach((form) => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!form.reportValidity()) return;
+    if (form.elements._honey && form.elements._honey.value) return;
     const nome = form.elements.nome.value.trim();
     const email = form.elements.email.value.trim();
     const mensagem = form.elements.mensagem.value.trim();
@@ -446,28 +448,24 @@ root.querySelectorAll('.contact-form').forEach((form) => {
     status.className = 'form-status';
     status.textContent = msg()[0];
 
-    fetch(`https://formsubmit.co/ajax/${FORM_EMAIL}`, {
+    fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
-        Nome: nome,
+        access_key: WEB3FORMS_KEY,
+        subject: `Contato pelo site: ${nome}`,
+        from_name: 'Site Rock Tour',
+        name: nome,
         email: email,
-        Mensagem: mensagem,
-        _subject: `Contato pelo site: ${nome}`,
-        _template: 'table',
-        _honey: form.elements._honey.value
+        message: mensagem
       })
     })
       .then((r) => r.json())
       .then((data) => {
-        if (String(data.success) === 'true') {
+        if (data.success) {
           status.className = 'form-status ok';
           status.textContent = msg()[1];
           form.reset();
-        } else if (/activat/i.test(data.message || '')) {
-          // Só acontece antes de ativar o formulário pela primeira vez
-          status.className = 'form-status err';
-          status.textContent = `Formulário aguardando ativação: abra o e-mail do FormSubmit enviado para ${FORM_EMAIL} e clique em "Activate Form".`;
         } else {
           showError();
         }
