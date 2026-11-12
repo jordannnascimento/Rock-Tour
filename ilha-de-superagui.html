@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ilha de Superagui :: RockTour Tourism</title>
+  <meta name="description" content="Roteiro de 3 dias e 2 noites da Rock Tour para Ilha de Superagui. Navegação pelo Lagamar, fauna do litoral e a revoada dos papagaios.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/simbolo-rocktour.png">
+  <link rel="apple-touch-icon" href="img/simbolo-rocktour.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/roteiros.css">
+  <noscript><style>.welcome { display: none !important; }</style></noscript>
+</head>
+<body>
+
+  <!-- Boas-vindas: o clique em "Ver site" libera o som e começa a música -->
+  <div class="welcome" id="welcome" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+    <div class="welcome-box">
+      <img src="img/logo-rocktour.png" alt="Rock Tour" class="welcome-logo">
+      <h2 id="welcomeTitle">Bem-vindo à Rock Tour!</h2>
+      <p>A música começa quando você entrar no site.</p>
+      <button type="button" class="btn-welcome">Ver site</button>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><img src="img/logo-rocktour.png" alt="Rock Tour"></a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+      <nav class="nav" id="nav">
+        <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="nossa-historia.html">Nossa história</a></li>
+        <li><a href="mundo-mormon.html">Mundo Mórmon</a></li>
+        <li><a href="pacotes-internacionais.html">Pacotes Internacionais</a></li>
+        <li class="rt-has-sub">
+          <a href="pacotes-nacionais.html" class="active">Pacotes Nacionais</a>
+          <button type="button" class="rt-sub-toggle" aria-expanded="false" aria-label="Abrir submenu de Pacotes Nacionais"><i class="fa-solid fa-chevron-down"></i></button>
+          <ul class="rt-submenu">
+            <li><a href="foz-do-iguacu.html">Foz do Iguaçu</a></li>
+            <li><a href="rio-de-janeiro.html">Rio de Janeiro</a></li>
+            <li><a href="ilha-de-superagui.html" class="active">Ilha de Superagui</a></li>
+            <li><a href="florianopolis.html">Florianópolis e Balneário Camboriú</a></li>
+            <li><a href="pacotes-nacionais.html">Ver todos os pacotes</a></li>
+          </ul>
+        </li>
+        <li><a href="parana.html">Paraná</a></li>
+        <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="lang">
+        <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Idioma / Language">
+          <span class="lang-flag"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009c3b"/><path d="M15 2.4 27.6 10 15 17.6 2.4 10z" fill="#ffdf00"/><circle cx="15" cy="10" r="4.7" fill="#002776"/><path d="M10.5 9.1q4.6-1.6 9 1.6" stroke="#fff" stroke-width="0.9" fill="none"/></svg></span><span class="lang-current">PT</span><i class="fa-solid fa-chevron-down lang-caret"></i>
+        </button>
+        <ul class="lang-menu" hidden>
+          <li><button type="button" data-lang="pt"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009c3b"/><path d="M15 2.4 27.6 10 15 17.6 2.4 10z" fill="#ffdf00"/><circle cx="15" cy="10" r="4.7" fill="#002776"/><path d="M10.5 9.1q4.6-1.6 9 1.6" stroke="#fff" stroke-width="0.9" fill="none"/></svg><span>Português</span></button></li>
+          <li><button type="button" data-lang="en"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#b22234"/><rect y="1.538" width="30" height="1.538" fill="#fff"/><rect y="4.615" width="30" height="1.538" fill="#fff"/><rect y="7.692" width="30" height="1.538" fill="#fff"/><rect y="10.769" width="30" height="1.538" fill="#fff"/><rect y="13.846" width="30" height="1.538" fill="#fff"/><rect y="16.923" width="30" height="1.538" fill="#fff"/><rect width="12" height="10.769" fill="#3c3b6e"/></svg><span>English</span></button></li>
+          <li><button type="button" data-lang="es"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#aa151b"/><rect y="5" width="30" height="10" fill="#f1bf00"/></svg><span>Español</span></button></li>
+          <li><button type="button" data-lang="fr"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#ef4135"/><rect width="20" height="20" fill="#fff"/><rect width="10" height="20" fill="#0055a4"/></svg><span>Français</span></button></li>
+          <li><button type="button" data-lang="ja"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><circle cx="15" cy="10" r="6" fill="#bc002d"/></svg><span>日本語</span></button></li>
+          <li><button type="button" data-lang="de"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#ffce00"/><rect width="30" height="13.33" fill="#dd0000"/><rect width="30" height="6.67" fill="#000"/></svg><span>Deutsch</span></button></li>
+          <li><button type="button" data-lang="it"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#ce2b37"/><rect width="20" height="20" fill="#fff"/><rect width="10" height="20" fill="#009246"/></svg><span>Italiano</span></button></li>
+          <li><button type="button" data-lang="he"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect y="2" width="30" height="2.6" fill="#0038b8"/><rect y="15.4" width="30" height="2.6" fill="#0038b8"/><path d="M15 6.2 18.3 11.9H11.7zM15 13.8 11.7 8.1H18.3z" fill="none" stroke="#0038b8" stroke-width="0.8"/></svg><span>עברית</span></button></li>
+          <li><button type="button" data-lang="zh"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#de2910"/><polygon points="5.00,2.00 5.67,4.07 7.85,4.07 6.09,5.35 6.76,7.43 5.00,6.15 3.24,7.43 3.91,5.35 2.15,4.07 4.33,4.07" fill="#ffde00"/><polygon points="10.00,1.00 10.22,1.69 10.95,1.69 10.36,2.12 10.59,2.81 10.00,2.38 9.41,2.81 9.64,2.12 9.05,1.69 9.78,1.69" fill="#ffde00"/><polygon points="12.00,3.00 12.22,3.69 12.95,3.69 12.36,4.12 12.59,4.81 12.00,4.38 11.41,4.81 11.64,4.12 11.05,3.69 11.78,3.69" fill="#ffde00"/><polygon points="12.00,6.00 12.22,6.69 12.95,6.69 12.36,7.12 12.59,7.81 12.00,7.38 11.41,7.81 11.64,7.12 11.05,6.69 11.78,6.69" fill="#ffde00"/><polygon points="10.00,8.00 10.22,8.69 10.95,8.69 10.36,9.12 10.59,9.81 10.00,9.38 9.41,9.81 9.64,9.12 9.05,8.69 9.78,8.69" fill="#ffde00"/></svg><span>中文</span></button></li>
+          <li><button type="button" data-lang="sv"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#006aa7"/><rect x="9.4" width="3.8" height="20" fill="#fecc00"/><rect y="8.1" width="30" height="3.8" fill="#fecc00"/></svg><span>Svenska</span></button></li>
+          <li><button type="button" data-lang="no"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#ba0c2f"/><rect x="8.2" width="5.5" height="20" fill="#fff"/><rect y="7.25" width="30" height="5.5" fill="#fff"/><rect x="9.6" width="2.7" height="20" fill="#00205b"/><rect y="8.65" width="30" height="2.7" fill="#00205b"/></svg><span>Norsk</span></button></li>
+          <li><button type="button" data-lang="fi"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect x="8.3" width="5" height="20" fill="#002f6c"/><rect y="7.5" width="30" height="5" fill="#002f6c"/></svg><span>Suomi</span></button></li>
+          <li><button type="button" data-lang="da"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#c8102e"/><rect x="9.7" width="3.2" height="20" fill="#fff"/><rect y="8.4" width="30" height="3.2" fill="#fff"/></svg><span>Dansk</span></button></li>
+          <li><button type="button" data-lang="el"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#0d5eaf"/><rect y="2.222" width="30" height="2.222" fill="#fff"/><rect y="6.667" width="30" height="2.222" fill="#fff"/><rect y="11.111" width="30" height="2.222" fill="#fff"/><rect y="15.556" width="30" height="2.222" fill="#fff"/><rect width="11.111" height="11.111" fill="#0d5eaf"/><rect x="4.444" width="2.222" height="11.111" fill="#fff"/><rect y="4.444" width="11.111" height="2.222" fill="#fff"/></svg><span>Ελληνικά</span></button></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+  <section class="hero page-hero" style="background-image: url('https://97afcb185d.cbaul-cdnwnd.com/6f993fae9f1f40d95bb15cda1f112e9f/200000045-7d64b7efac/tumblr_mdrjs3m8M11ql734to1_1280.jpg?ph=97afcb185d');">
+    <div class="container">
+      <h1><strong>ILHA DE SUPERAGUI</strong></h1>
+      <h3><strong>3 dias / 2 noites</strong></h3>
+    </div>
+  </section>
+
+  <section class="section rt-section">
+    <div class="container">
+      <div class="rt-detail">
+        <header class="rt-route-head">
+          <span class="rt-num">Roteiro nacional</span>
+          <h2>Lagamar, Ararapira, Natureza, Vida Selvagem</h2>
+          <p class="rt-lead">A proposta não é apenas visitar uma ilha, mas proporcionar uma experiência de ecoturismo, navegação, observação da fauna, cultura caiçara e contato com uma das regiões naturais mais preservadas do litoral brasileiro.</p>
+          <p class="rt-meta"><span>3 dias / 2 noites</span><span class="rt-price">A partir de R$ 1.290 por pessoa</span></p>
+        </header>
+
+        <div class="rt-days">
+          <div class="rt-day">
+            <h4>Dia 1 &ndash; Curitiba &rarr; Ilha de Superagui</h4>
+            <ul>
+              <li>Saída de Curitiba pela manhã em direção ao litoral do Paraná</li>
+              <li>Transporte terrestre até o ponto de embarque</li>
+              <li>Navegação pelo complexo estuarino do Lagamar</li>
+              <li>Chegada à Barra do Superagui e acomodação na pousada</li>
+              <li>Almoço</li>
+              <li>Conhecimento da comunidade caiçara e caminhada pela região</li>
+              <li>Praia Deserta e pôr do sol</li>
+              <li>Jantar com gastronomia local e pernoite</li>
+            </ul>
+          </div>
+          <div class="rt-day">
+            <h4>Dia 2 &ndash; Ararapira, canais e vida selvagem</h4>
+            <ul>
+              <li>Saída de barco para explorar os canais e ilhas na divisa entre Paraná e São Paulo</li>
+              <li>Navegação pelo Canal do Varadouro, entre manguezais, ilhas e comunidades tradicionais</li>
+              <li>Possibilidade de observar jacarés, guarás, colhereiros e outras aves</li>
+              <li>Possibilidade de observar botos e golfinhos</li>
+              <li>Final da tarde na Baía dos Pinheiros para a revoada dos papagaios-de-cara-roxa</li>
+              <li>Retorno para Superagui, jantar e pernoite</li>
+            </ul>
+          </div>
+          <div class="rt-day">
+            <h4>Dia 3 &ndash; Superagui &rarr; Curitiba</h4>
+            <ul>
+              <li>Café da manhã</li>
+              <li>Manhã livre: praia ou caminhada</li>
+              <li>Almoço e embarque</li>
+              <li>Retorno pelo litoral até Curitiba</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="rt-subhead">Hospedagem</h3>
+        <ul class="rt-tiers">
+          <li>Econômico</li>
+          <li>Conforto</li>
+          <li>Premium</li>
+        </ul>
+
+        <div class="rt-note">
+          <p>Superagui tem acesso exclusivamente por navegação e estrutura turística simples, justamente por se tratar de uma região preservada. A observação da fauna e os deslocamentos estão sujeitos às condições de maré, clima e navegação, e os barcos precisam ser agendados previamente.</p>
+        </div>
+
+        <div class="rt-actions">
+          <a class="rt-btn-whats" href="https://wa.me/13853437555?text=Ol%C3%A1%21%20Quero%20informa%C3%A7%C3%B5es%20sobre%20o%20roteiro%20de%203%20dias%20para%20Ilha%20de%20Superagui." target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i><span>Reservar no WhatsApp</span></a>
+          <a class="rt-btn rt-btn-ghost" href="contato.html">Pedir cotação</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rt-section rt-form-section">
+    <div class="container">
+      <header class="rt-head">
+        <span class="rt-kicker">Continue explorando</span>
+        <h2>OUTROS ROTEIROS DE 3 DIAS</h2>
+      </header>
+      <div class="rt-tours">
+        <article class="rt-tour">
+          <h3>FOZ DO IGUAÇU</h3>
+          <p class="rt-sub">Brasil &bull; Paraguai &bull; Natureza &bull; Cultura</p>
+          <p class="rt-meta"><span>3 dias / 2 noites</span><span class="rt-price">A partir de R$ 2.390 por pessoa</span></p>
+          <p>Cataratas do Iguaçu, Parque das Aves, Itaipu e um dia no Paraguai.</p>
+          <div class="rt-actions">
+            <a class="rt-btn" href="foz-do-iguacu.html">Ver roteiro completo</a>
+          </div>
+        </article>
+        <article class="rt-tour">
+          <h3>RIO DE JANEIRO</h3>
+          <p class="rt-sub">Corcovado &bull; Cristo Redentor &bull; Pão de Açúcar &bull; Praias</p>
+          <p class="rt-meta"><span>3 dias / 2 noites</span><span class="rt-price">A partir de R$ 2.690 por pessoa</span></p>
+          <p>Corcovado, Cristo Redentor, Pão de Açúcar e as praias da Zona Sul.</p>
+          <div class="rt-actions">
+            <a class="rt-btn" href="rio-de-janeiro.html">Ver roteiro completo</a>
+          </div>
+        </article>
+        <article class="rt-tour">
+          <h3>FLORIANÓPOLIS + BALNEÁRIO CAMBORIÚ</h3>
+          <p class="rt-sub">Santa Catarina &bull; Praias &bull; Cultura &bull; Natureza</p>
+          <p class="rt-meta"><span>3 dias / 2 noites</span><span class="rt-price">A partir de R$ 1.590 por pessoa</span></p>
+          <p>Balneário Camboriú no primeiro dia e dois dias na Ilha da Magia.</p>
+          <div class="rt-actions">
+            <a class="rt-btn" href="florianopolis.html">Ver roteiro completo</a>
+          </div>
+        </article>
+      </div>
+      <div class="rt-actions" style="justify-content: center;">
+        <a class="rt-btn rt-btn-ghost" href="pacotes-nacionais.html">Ver todos os pacotes nacionais</a>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="logo"><img src="img/logo-rocktour.png" alt="Rock Tour"></a>
+        <p>Para nós da Rock Tour viajar está na lista das cinco melhores coisas do mundo.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="nossa-historia.html">Nossa história</a></li>
+          <li><a href="mundo-mormon.html">Mundo Mórmon</a></li>
+          <li><a href="pacotes-internacionais.html">Pacotes Internacionais</a></li>
+          <li><a href="pacotes-nacionais.html">Pacotes Nacionais</a></li>
+          <li><a href="parana.html">Paraná</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul class="footer-contact">
+          <li><i class="fa-solid fa-envelope"></i><a href="mailto:rocktourcontato@gmail.com">rocktourcontato@gmail.com</a></li>
+          <li><i class="fa-solid fa-mobile-screen"></i><a href="tel:+13853437555">+1 (385) 343-7555</a></li>
+        </ul>
+        <div class="social">
+          <a href="https://www.facebook.com/rocktouragencia/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#instagram" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span class="year">2026</span> Rock Tour. <span>Todos os direitos reservados.</span></p>
+    </div>
+  </footer>
+
+  <!-- Botão flutuante do WhatsApp -->
+  <a href="https://wa.me/13853437555" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <!-- Player de música (mp3 ou YouTube, definido em js/main.js) -->
+  <div class="yt-player" id="ytPlayer" hidden>
+    <div class="yt-head">
+      <span><i class="fa-solid fa-music"></i> <span>Música</span></span>
+      <button class="yt-close" type="button" aria-label="Fechar player"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="yt-frame"><div id="ytFrame"></div></div>
+    <div class="mp3-ui" hidden>
+      <button type="button" class="mp3-play" aria-label="Tocar"><i class="fa-solid fa-play"></i></button>
+      <div class="mp3-info">
+        <span class="mp3-label"><span>Música</span></span>
+        <p class="mp3-title"></p>
+      </div>
+      <button type="button" class="mp3-prev" aria-label="Música anterior"><i class="fa-solid fa-backward-step"></i></button>
+      <button type="button" class="mp3-next" aria-label="Próxima música"><i class="fa-solid fa-forward-step"></i></button>
+      <div class="mp3-volume">
+        <button type="button" class="mp3-mute" aria-label="Silenciar"><i class="fa-solid fa-volume-high"></i></button>
+        <input type="range" class="mp3-vol" min="0" max="100" step="1" value="50" aria-label="Volume">
+      </div>
+      <button type="button" class="mp3-close" aria-label="Fechar player"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+  <button class="music-btn" type="button" aria-label="Abrir player de música" aria-expanded="false"><i class="fa-solid fa-music"></i></button>
+
+  <script src="js/menu.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

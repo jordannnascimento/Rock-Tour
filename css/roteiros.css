@@ -15,6 +15,62 @@
   --rt-radius: 14px;
 }
 
+/* ------------------------------------------- submenu do menu principal --- */
+/* Se o seu menu mobile abrir em outra largura, troque o 900px das duas medias. */
+.rt-has-sub { position: relative; }
+.rt-has-sub > .rt-submenu {
+  display: block; list-style: none; margin: 0; padding: 8px;
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(6px);
+  min-width: 250px; width: max-content; max-width: 320px;
+  background: #fff; border: 1px solid var(--rt-line);
+  border-radius: 12px; box-shadow: 0 18px 44px rgba(31, 27, 24, .16);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .16s ease, transform .16s ease, visibility .16s;
+  z-index: 200;
+}
+.rt-has-sub > .rt-submenu::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px;
+}
+.rt-has-sub .rt-submenu li { display: block; margin: 0; padding: 0; width: 100%; }
+.rt-has-sub .rt-submenu li a {
+  display: block; padding: 10px 14px; border-radius: 8px; text-decoration: none;
+  font-family: "Montserrat", Arial, sans-serif; font-size: 14px; font-weight: 600;
+  letter-spacing: 0; text-transform: none; text-align: left; white-space: normal;
+  color: var(--rt-ink); line-height: 1.4;
+}
+.rt-has-sub .rt-submenu li a:hover,
+.rt-has-sub .rt-submenu li a:focus-visible { background: var(--rt-paper); color: var(--rt-accent); }
+.rt-has-sub .rt-submenu li a.active { color: var(--rt-accent); }
+.rt-has-sub .rt-submenu li:last-child a {
+  border-top: 1px solid var(--rt-line); border-radius: 0 0 8px 8px;
+  margin-top: 6px; padding-top: 12px; font-size: 13px; color: var(--rt-soft);
+}
+.rt-has-sub > .rt-sub-toggle {
+  display: none; background: none; border: 0; cursor: pointer; padding: 4px 6px;
+  color: inherit; font-size: 11px; line-height: 1;
+}
+@media (min-width: 901px) {
+  .rt-has-sub:hover > .rt-submenu,
+  .rt-has-sub:focus-within > .rt-submenu,
+  .rt-has-sub.rt-open > .rt-submenu {
+    opacity: 1; visibility: visible; pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+@media (max-width: 900px) {
+  .rt-has-sub { display: flex; flex-wrap: wrap; align-items: center; }
+  .rt-has-sub > .rt-sub-toggle { display: inline-flex; align-items: center; }
+  .rt-has-sub > .rt-submenu {
+    display: none; position: static; transform: none; opacity: 1; visibility: visible;
+    pointer-events: auto; box-shadow: none; border: 0;
+    border-left: 2px solid var(--rt-line); border-radius: 0;
+    min-width: 0; width: 100%; max-width: none; padding: 0 0 0 14px; margin: 4px 0 8px;
+  }
+  .rt-has-sub.rt-open > .rt-submenu { display: block; }
+  .rt-has-sub.rt-open > .rt-sub-toggle { transform: rotate(180deg); }
+  .rt-has-sub .rt-submenu li a { padding: 9px 10px; }
+}
+
 /* --------------------------------------------------------- cabecalho ----- */
 .rt-head { max-width: 800px; margin: 0 auto 44px; text-align: center; }
 .rt-kicker {
@@ -179,6 +235,7 @@
   display: grid; gap: 24px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
+.rt-tours-2 { grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); }
 .rt-tour {
   display: flex; flex-direction: column; background: #fff;
   border: 1px solid var(--rt-line); border-radius: var(--rt-radius); padding: 30px 26px;
@@ -189,9 +246,25 @@
   font-family: "Montserrat", Arial, sans-serif; font-size: 17px; font-weight: 800;
   letter-spacing: .05em; color: var(--rt-ink); margin: 0 0 16px; line-height: 1.35;
 }
+.rt-tour .rt-sub {
+  font-size: 13px; font-weight: 600; letter-spacing: .04em;
+  color: var(--rt-accent); margin: -8px 0 16px; line-height: 1.6;
+}
 .rt-tour .rt-meta { margin-bottom: 18px; }
 .rt-tour p { font-size: 15px; line-height: 1.75; color: var(--rt-soft); margin: 0 0 24px; }
 .rt-tour .rt-btn-whats { margin-top: auto; align-self: flex-start; }
+.rt-tour .rt-actions { margin-top: auto; gap: 10px; }
+.rt-tour .rt-actions .rt-btn,
+.rt-tour .rt-actions .rt-btn-whats { flex: 1 1 auto; margin-top: 0; align-self: stretch; }
+
+/* ------------------------------------------ pagina individual do roteiro - */
+.rt-detail { max-width: 880px; }
+.rt-subhead {
+  font-family: "Montserrat", Arial, sans-serif; font-size: 13px; font-weight: 800;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--rt-ink);
+  margin: 40px 0 0; padding-top: 30px; border-top: 1px solid var(--rt-line);
+}
+.rt-subhead + .rt-tiers { margin-top: 16px; }
 
 /* ------------------------------------------------------------ tabela ---- */
 .rt-table-wrap { margin-top: 44px; overflow-x: auto; }

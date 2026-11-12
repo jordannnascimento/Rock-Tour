@@ -12,6 +12,7 @@
   <link rel="apple-touch-icon" href="img/simbolo-rocktour.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/roteiros.css">
   <noscript><style>.welcome { display: none !important; }</style></noscript>
 </head>
 <body>
@@ -36,7 +37,17 @@
         <li><a href="nossa-historia.html">Nossa história</a></li>
         <li><a href="mundo-mormon.html">Mundo Mórmon</a></li>
         <li><a href="pacotes-internacionais.html" class="active">Pacotes Internacionais</a></li>
-        <li><a href="pacotes-nacionais.html">Pacotes Nacionais</a></li>
+        <li class="rt-has-sub">
+          <a href="pacotes-nacionais.html">Pacotes Nacionais</a>
+          <button type="button" class="rt-sub-toggle" aria-expanded="false" aria-label="Abrir submenu de Pacotes Nacionais"><i class="fa-solid fa-chevron-down"></i></button>
+          <ul class="rt-submenu">
+            <li><a href="foz-do-iguacu.html">Foz do Iguaçu</a></li>
+            <li><a href="rio-de-janeiro.html">Rio de Janeiro</a></li>
+            <li><a href="ilha-de-superagui.html">Ilha de Superagui</a></li>
+            <li><a href="florianopolis.html">Florianópolis e Balneário Camboriú</a></li>
+            <li><a href="pacotes-nacionais.html">Ver todos os pacotes</a></li>
+          </ul>
+        </li>
         <li><a href="parana.html">Paraná</a></li>
         <li><a href="contato.html">Contato</a></li>
         </ul>
@@ -185,6 +196,7 @@
   </div>
   <button class="music-btn" type="button" aria-label="Abrir player de música" aria-expanded="false"><i class="fa-solid fa-music"></i></button>
 
+  <script src="js/menu.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/main.js"></script>
 </body>
