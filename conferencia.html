@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conferência Geral em Salt Lake City :: RockTour Tourism</title>
+  <meta name="description" content="Viagens da Rock Tour para a Conferência Geral em Salt Lake City: Rota Histórica, Conferência + Grandes Parques e Conferência + Utah Experience.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/simbolo-rocktour.png">
+  <link rel="apple-touch-icon" href="img/simbolo-rocktour.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/roteiros.css">
+  <noscript><style>.welcome { display: none !important; }</style></noscript>
+</head>
+<body>
+
+  <!-- Boas-vindas: o clique em "Ver site" libera o som e começa a música -->
+  <div class="welcome" id="welcome" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+    <div class="welcome-box">
+      <img src="img/logo-rocktour.png" alt="Rock Tour" class="welcome-logo">
+      <h2 id="welcomeTitle">Bem-vindo à Rock Tour!</h2>
+      <p>A música começa quando você entrar no site.</p>
+      <button type="button" class="btn-welcome">Ver site</button>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><img src="img/logo-rocktour.png" alt="Rock Tour"></a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+      <nav class="nav" id="nav">
+        <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="nossa-historia.html">Nossa história</a></li>
+        <li><a href="mundo-mormon.html">Mundo Mórmon</a></li>
+        <li><a href="pacotes-internacionais.html">Pacotes Internacionais</a></li>
+        <li><a href="pacotes-nacionais.html">Pacotes Nacionais</a></li>
+        <li><a href="parana.html">Paraná</a></li>
+        <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="lang">
+        <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Idioma / Language">
+          <span class="lang-flag"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009c3b"/><path d="M15 2.4 27.6 10 15 17.6 2.4 10z" fill="#ffdf00"/><circle cx="15" cy="10" r="4.7" fill="#002776"/><path d="M10.5 9.1q4.6-1.6 9 1.6" stroke="#fff" stroke-width="0.9" fill="none"/></svg></span><span class="lang-current">PT</span><i class="fa-solid fa-chevron-down lang-caret"></i>
+        </button>
+        <ul class="lang-menu" hidden>
+          <li><button type="button" data-lang="pt"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009c3b"/><path d="M15 2.4 27.6 10 15 17.6 2.4 10z" fill="#ffdf00"/><circle cx="15" cy="10" r="4.7" fill="#002776"/><path d="M10.5 9.1q4.6-1.6 9 1.6" stroke="#fff" stroke-width="0.9" fill="none"/></svg><span>Português</span></button></li>
+          <li><button type="button" data-lang="en"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#b22234"/><rect y="1.538" width="30" height="1.538" fill="#fff"/><rect y="4.615" width="30" height="1.538" fill="#fff"/><rect y="7.692" width="30" height="1.538" fill="#fff"/><rect y="10.769" width="30" height="1.538" fill="#fff"/><rect y="13.846" width="30" height="1.538" fill="#fff"/><rect y="16.923" width="30" height="1.538" fill="#fff"/><rect width="12" height="10.769" fill="#3c3b6e"/></svg><span>English</span></button></li>
+          <li><button type="button" data-lang="es"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#aa151b"/><rect y="5" width="30" height="10" fill="#f1bf00"/></svg><span>Español</span></button></li>
+          <li><button type="button" data-lang="fr"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#ef4135"/><rect width="20" height="20" fill="#fff"/><rect width="10" height="20" fill="#0055a4"/></svg><span>Français</span></button></li>
+          <li><button type="button" data-lang="ja"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><circle cx="15" cy="10" r="6" fill="#bc002d"/></svg><span>日本語</span></button></li>
+          <li><button type="button" data-lang="de"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#ffce00"/><rect width="30" height="13.33" fill="#dd0000"/><rect width="30" height="6.67" fill="#000"/></svg><span>Deutsch</span></button></li>
+          <li><button type="button" data-lang="it"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#ce2b37"/><rect width="20" height="20" fill="#fff"/><rect width="10" height="20" fill="#009246"/></svg><span>Italiano</span></button></li>
+          <li><button type="button" data-lang="he"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect y="2" width="30" height="2.6" fill="#0038b8"/><rect y="15.4" width="30" height="2.6" fill="#0038b8"/><path d="M15 6.2 18.3 11.9H11.7zM15 13.8 11.7 8.1H18.3z" fill="none" stroke="#0038b8" stroke-width="0.8"/></svg><span>עברית</span></button></li>
+          <li><button type="button" data-lang="zh"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#de2910"/><polygon points="5.00,2.00 5.67,4.07 7.85,4.07 6.09,5.35 6.76,7.43 5.00,6.15 3.24,7.43 3.91,5.35 2.15,4.07 4.33,4.07" fill="#ffde00"/><polygon points="10.00,1.00 10.22,1.69 10.95,1.69 10.36,2.12 10.59,2.81 10.00,2.38 9.41,2.81 9.64,2.12 9.05,1.69 9.78,1.69" fill="#ffde00"/><polygon points="12.00,3.00 12.22,3.69 12.95,3.69 12.36,4.12 12.59,4.81 12.00,4.38 11.41,4.81 11.64,4.12 11.05,3.69 11.78,3.69" fill="#ffde00"/><polygon points="12.00,6.00 12.22,6.69 12.95,6.69 12.36,7.12 12.59,7.81 12.00,7.38 11.41,7.81 11.64,7.12 11.05,6.69 11.78,6.69" fill="#ffde00"/><polygon points="10.00,8.00 10.22,8.69 10.95,8.69 10.36,9.12 10.59,9.81 10.00,9.38 9.41,9.81 9.64,9.12 9.05,8.69 9.78,8.69" fill="#ffde00"/></svg><span>中文</span></button></li>
+          <li><button type="button" data-lang="sv"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#006aa7"/><rect x="9.4" width="3.8" height="20" fill="#fecc00"/><rect y="8.1" width="30" height="3.8" fill="#fecc00"/></svg><span>Svenska</span></button></li>
+          <li><button type="button" data-lang="no"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#ba0c2f"/><rect x="8.2" width="5.5" height="20" fill="#fff"/><rect y="7.25" width="30" height="5.5" fill="#fff"/><rect x="9.6" width="2.7" height="20" fill="#00205b"/><rect y="8.65" width="30" height="2.7" fill="#00205b"/></svg><span>Norsk</span></button></li>
+          <li><button type="button" data-lang="fi"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect x="8.3" width="5" height="20" fill="#002f6c"/><rect y="7.5" width="30" height="5" fill="#002f6c"/></svg><span>Suomi</span></button></li>
+          <li><button type="button" data-lang="da"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#c8102e"/><rect x="9.7" width="3.2" height="20" fill="#fff"/><rect y="8.4" width="30" height="3.2" fill="#fff"/></svg><span>Dansk</span></button></li>
+          <li><button type="button" data-lang="el"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#0d5eaf"/><rect y="2.222" width="30" height="2.222" fill="#fff"/><rect y="6.667" width="30" height="2.222" fill="#fff"/><rect y="11.111" width="30" height="2.222" fill="#fff"/><rect y="15.556" width="30" height="2.222" fill="#fff"/><rect width="11.111" height="11.111" fill="#0d5eaf"/><rect x="4.444" width="2.222" height="11.111" fill="#fff"/><rect y="4.444" width="11.111" height="2.222" fill="#fff"/></svg><span>Ελληνικά</span></button></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+  <section class="hero page-hero" style="background-image: url('img/salt-lake-temple.jpg');">
+    <div class="container">
+      <h1><strong>CONFERÊNCIA GERAL</strong></h1>
+      <h3><strong>SALT LAKE CITY</strong></h3>
+    </div>
+  </section>
+
+  <section class="section rt-section">
+    <div class="container">
+      <header class="rt-head">
+        <span class="rt-kicker">Rock Tour</span>
+        <h2>UMA VIAGEM. UMA EXPERIÊNCIA. UMA HISTÓRIA PARA TODA A VIDA.</h2>
+        <p>Para os brasileiros que desejam participar da Conferência Geral em Salt Lake City, a
+        Rock Tour oferece três maneiras diferentes de organizar essa experiência. Escolha a que
+        combina com o seu tempo, o seu ritmo e o que você quer viver nos Estados Unidos.</p>
+      </header>
+
+      <div class="rt-options">
+        <article class="rt-option">
+          <span class="rt-option-num">01</span>
+          <h3>A ROTA HISTÓRICA</h3>
+          <p class="rt-route">Palmyra &bull; Kirtland &bull; Nauvoo &bull; Carthage &bull; Adam-ondi-Ahman &bull; Liberty &bull; Salt Lake City</p>
+          <p class="rt-desc">Conheça lugares fundamentais da história da Restauração antes de participar da Conferência Geral.</p>
+          <span class="rt-badge">12 a 15 dias</span>
+          <a class="rt-btn" href="#opcao-1">Saiba mais</a>
+        </article>
+        <article class="rt-option">
+          <span class="rt-option-num">02</span>
+          <h3>CONFERÊNCIA + GRANDES PARQUES</h3>
+          <p class="rt-route">Salt Lake City &bull; Conferência Geral &bull; Zion &bull; Bryce Canyon &bull; Arches &bull; Canyonlands &bull; Grand Canyon &bull; Yellowstone</p>
+          <p class="rt-desc">Participe da Conferência Geral e depois embarque em uma grande aventura pelos parques do Oeste americano.</p>
+          <span class="rt-badge">12 a 16 dias</span>
+          <a class="rt-btn" href="#opcao-2">Saiba mais</a>
+        </article>
+        <article class="rt-option">
+          <span class="rt-option-num">03</span>
+          <h3>CONFERÊNCIA + UTAH EXPERIENCE</h3>
+          <p class="rt-route">Salt Lake City &bull; Conferência Geral &bull; Park City &bull; Great Salt Lake &bull; Antelope Island &bull; Utah Valley</p>
+          <p class="rt-desc">A opção ideal para quem deseja participar da Conferência e conhecer Salt Lake City e seus arredores com mais tranquilidade.</p>
+          <span class="rt-badge">7 a 9 dias</span>
+          <a class="rt-btn" href="#opcao-3">Saiba mais</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rt-section">
+    <div class="container">
+      <div class="rt-route-block" id="opcao-1">
+        <header class="rt-route-head">
+          <span class="rt-num">Opção 01</span>
+          <h2>A ROTA HISTÓRICA</h2>
+          <p class="rt-lead">Uma viagem especial para quem deseja conhecer alguns dos lugares mais importantes da história da Restauração antes de chegar a Salt Lake City. A viagem começa no leste dos Estados Unidos e atravessa importantes locais históricos até chegar a Utah.</p>
+          <p class="rt-meta"><span>Duração sugerida: 12 a 15 dias</span><span class="rt-price">Consulte o valor</span></p>
+        </header>
+        <ol class="rt-steps">
+        <li class="rt-step">
+          <h4>Palmyra &ndash; New York</h4>
+          <p>Primeiro contato com alguns dos locais mais importantes da história da Restauração.</p>
+          <ul>
+            <li>Sacred Grove</li>
+            <li>Hill Cumorah</li>
+            <li>Joseph Smith Family Farm</li>
+            <li>Locais históricos de Palmyra</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Kirtland &ndash; Ohio</h4>
+          <p>Visita aos locais históricos da primeira época da Igreja, com foco na história e no contexto dos primeiros membros.</p>
+          <ul>
+            <li>Kirtland Temple</li>
+            <li>Newel K. Whitney Store</li>
+            <li>Historic Kirtland</li>
+            <li>Johnson Farm</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Nauvoo &ndash; Illinois</h4>
+          <p>Uma das cidades mais importantes da história da Igreja, com tempo para conhecer a cidade e sua história.</p>
+          <ul>
+            <li>Nauvoo Historic District</li>
+            <li>Mississippi River</li>
+            <li>Joseph Smith Homestead</li>
+            <li>Red Brick Store</li>
+            <li>Mansion House</li>
+            <li>Outros locais históricos disponíveis</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Carthage &ndash; Illinois</h4>
+          <p>Visita à região histórica de Carthage e à Carthage Jail, local associado aos acontecimentos de junho de 1844 e à morte de Joseph e Hyrum Smith. Um momento de reflexão e aprendizado sobre um dos episódios mais importantes da história da Restauração.</p>
+          <ul>
+            <li>Carthage Jail</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Adam-ondi-Ahman &ndash; Missouri</h4>
+          <p>Área de grande importância histórica e religiosa para os membros da Igreja. O visitante terá contato com a paisagem e com a história associada ao local.</p>
+          <ul>
+            <li>Adam-ondi-Ahman</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Liberty &ndash; Missouri</h4>
+          <p>Local histórico associado ao período em que Joseph Smith esteve preso no Missouri. Uma visita especialmente interessante para conhecer o contexto dos primeiros anos da Igreja.</p>
+          <ul>
+            <li>Liberty Jail</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Salt Lake City &ndash; Utah</h4>
+          <p>A viagem histórica termina em Salt Lake City, onde o grupo conhece a cidade e se prepara para a Conferência Geral.</p>
+          <ul>
+            <li>Temple Square</li>
+            <li>Conference Center</li>
+            <li>Tabernacle</li>
+            <li>Pontos históricos da cidade</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Conferência Geral</h4>
+          <p>Participação na Conferência Geral em Salt Lake City.</p>
+        </li>
+        </ol>
+        <div class="rt-actions">
+          <a class="rt-btn-whats" href="https://wa.me/13853437555?text=Ol%C3%A1%21%20Quero%20informa%C3%A7%C3%B5es%20sobre%20a%20viagem%20para%20a%20Confer%C3%AAncia%20Geral%20%26mdash%3B%20op%C3%A7%C3%A3o%2001%3A%20A%20Rota%20Hist%C3%B3rica." target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i><span>Falar no WhatsApp</span></a>
+          <a class="rt-btn rt-btn-ghost" href="#cotacao">Solicitar cotação</a>
+        </div>
+      </div>
+
+      <div class="rt-route-block" id="opcao-2">
+        <header class="rt-route-head">
+          <span class="rt-num">Opção 02</span>
+          <h2>CONFERÊNCIA + GRANDES PARQUES</h2>
+          <p class="rt-lead">Uma experiência espiritual seguida por uma grande aventura pelo Oeste americano. O visitante chega diretamente a Salt Lake City para a Conferência Geral e, depois, começa a viagem pelos grandes parques dos Estados Unidos.</p>
+          <p class="rt-meta"><span>Duração sugerida: 12 a 16 dias</span><span class="rt-price">Consulte o valor</span></p>
+        </header>
+        <ol class="rt-steps">
+        <li class="rt-step">
+          <h4>Salt Lake City</h4>
+          <p>Chegada, acomodação e passeios pela cidade.</p>
+          <ul>
+            <li>Temple Square</li>
+            <li>Conference Center</li>
+            <li>Tabernacle</li>
+            <li>Centro de Salt Lake City</li>
+            <li>Pontos históricos</li>
+            <li>Great Salt Lake, dependendo do roteiro</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Conferência Geral</h4>
+          <p>Participação na Conferência Geral.</p>
+        </li>
+        <li class="rt-step">
+          <h4>Zion National Park</h4>
+          <p>Primeiro destino da viagem pelos parques: montanhas, cânions, rios e trilhas.</p>
+          <ul>
+            <li>Zion Canyon</li>
+            <li>Virgin River</li>
+            <li>Canyon Overlook</li>
+            <li>Principais mirantes</li>
+            <li>Trilhas adequadas ao grupo</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Bryce Canyon National Park</h4>
+          <p>Conhecimento dos famosos hoodoos, formações rochosas que criam uma das paisagens mais diferentes do Oeste americano.</p>
+        </li>
+        <li class="rt-step">
+          <h4>Arches National Park</h4>
+          <p>Seguimos para Moab, para conhecer os famosos arcos naturais.</p>
+          <ul>
+            <li>Delicate Arch</li>
+            <li>Windows</li>
+            <li>Balanced Rock</li>
+            <li>Outros pontos panorâmicos</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Canyonlands National Park</h4>
+          <p>Uma paisagem monumental de cânions, rios, mesas e formações geológicas.</p>
+          <ul>
+            <li>Island in the Sky</li>
+            <li>Principais mirantes</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Grand Canyon National Park</h4>
+          <p>Um dos grandes símbolos naturais dos Estados Unidos, com tempo para conhecer os principais mirantes e apreciar o pôr do sol, dependendo do horário do grupo.</p>
+        </li>
+        <li class="rt-step">
+          <h4>Yellowstone National Park</h4>
+          <p>Dependendo da duração da viagem e da época do ano, o roteiro poderá continuar para um dos parques nacionais mais impressionantes do mundo.</p>
+          <ul>
+            <li>Old Faithful</li>
+            <li>Gêiseres e fontes termais</li>
+            <li>Grand Prismatic Spring</li>
+            <li>Lagos e montanhas</li>
+            <li>Bisões e outros animais</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Outros parques</h4>
+          <p>O roteiro poderá ser ampliado para incluir outros destinos.</p>
+          <ul>
+            <li>Grand Teton</li>
+            <li>Capitol Reef</li>
+            <li>Goblin Valley</li>
+            <li>Dead Horse Point</li>
+            <li>Monument Valley</li>
+            <li>Antelope Canyon</li>
+            <li>Horseshoe Bend</li>
+          </ul>
+        </li>
+        </ol>
+        <div class="rt-actions">
+          <a class="rt-btn-whats" href="https://wa.me/13853437555?text=Ol%C3%A1%21%20Quero%20informa%C3%A7%C3%B5es%20sobre%20a%20viagem%20para%20a%20Confer%C3%AAncia%20Geral%20%26mdash%3B%20op%C3%A7%C3%A3o%2002%3A%20Confer%C3%AAncia%20%2B%20Grandes%20Parques." target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i><span>Falar no WhatsApp</span></a>
+          <a class="rt-btn rt-btn-ghost" href="#cotacao">Solicitar cotação</a>
+        </div>
+      </div>
+
+      <div class="rt-route-block" id="opcao-3">
+        <header class="rt-route-head">
+          <span class="rt-num">Opção 03</span>
+          <h2>CONFERÊNCIA + UTAH EXPERIENCE</h2>
+          <p class="rt-lead">A opção mais confortável para quem quer participar da Conferência Geral sem fazer uma viagem longa, conhecendo Salt Lake City e algumas das principais atrações próximas.</p>
+          <p class="rt-meta"><span>Duração sugerida: 7 a 9 dias</span><span class="rt-price">Consulte o valor</span></p>
+        </header>
+        <ol class="rt-steps">
+        <li class="rt-step">
+          <h4>Dia 1 &ndash; Chegada a Salt Lake City</h4>
+          <ul>
+            <li>Aeroporto e transfer</li>
+            <li>Hotel</li>
+            <li>Apresentação do grupo</li>
+            <li>Orientação sobre a cidade</li>
+            <li>Jantar</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Dia 2 &ndash; Salt Lake City</h4>
+          <p>Passeio pela cidade e tempo livre para compras e preparação para a Conferência.</p>
+          <ul>
+            <li>Temple Square</li>
+            <li>Conference Center</li>
+            <li>Tabernacle</li>
+            <li>Downtown</li>
+            <li>Locais históricos</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Dia 3 &ndash; Conferência Geral</h4>
+          <p>Participação na Conferência Geral.</p>
+          <ul>
+            <li>Almoço após a sessão</li>
+            <li>Tempo livre</li>
+            <li>Atividades opcionais</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Dia 4 &ndash; Conferência / Salt Lake City</h4>
+          <p>Participação nas atividades da Conferência e tempo livre para conhecer a cidade.</p>
+        </li>
+        <li class="rt-step">
+          <h4>Dia 5 &ndash; Park City + Wasatch Mountains</h4>
+          <p>Passeio por uma das cidades montanhosas mais conhecidas de Utah.</p>
+          <ul>
+            <li>Historic Main Street</li>
+            <li>Montanhas</li>
+            <li>Lojas e restaurantes</li>
+            <li>Paisagens</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Dia 6 &ndash; Antelope Island + Great Salt Lake</h4>
+          <p>Uma das experiências naturais mais interessantes próximas de Salt Lake City.</p>
+          <ul>
+            <li>Bisões</li>
+            <li>Antílopes</li>
+            <li>Aves</li>
+            <li>Paisagens do Great Salt Lake</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Dia 7 &ndash; Sul de Utah</h4>
+          <p>Dependendo da duração escolhida, o dia pode incluir:</p>
+          <ul>
+            <li>Provo / Utah Valley</li>
+            <li>Park City / Heber Valley</li>
+            <li>Ou, para uma experiência mais intensa, Zion National Park</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Dia 8 &ndash; Salt Lake City</h4>
+          <p>Dia livre, com várias possibilidades.</p>
+          <ul>
+            <li>Compras</li>
+            <li>Museus</li>
+            <li>Gastronomia</li>
+            <li>Temple Square</li>
+            <li>Atividades opcionais</li>
+          </ul>
+        </li>
+        <li class="rt-step">
+          <h4>Dia 9 &ndash; Retorno</h4>
+          <p>Transfer para o aeroporto e retorno ao Brasil.</p>
+        </li>
+        </ol>
+        <div class="rt-actions">
+          <a class="rt-btn-whats" href="https://wa.me/13853437555?text=Ol%C3%A1%21%20Quero%20informa%C3%A7%C3%B5es%20sobre%20a%20viagem%20para%20a%20Confer%C3%AAncia%20Geral%20%26mdash%3B%20op%C3%A7%C3%A3o%2003%3A%20Confer%C3%AAncia%20%2B%20Utah%20Experience." target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i><span>Falar no WhatsApp</span></a>
+          <a class="rt-btn rt-btn-ghost" href="#cotacao">Solicitar cotação</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rt-section">
+    <div class="container">
+      <header class="rt-head">
+        <span class="rt-kicker">Importante sobre preços</span>
+        <h2>CONSULTE O VALOR DA SUA VIAGEM</h2>
+        <p>Cada viagem é montada sob medida, por isso não trabalhamos com preço fixo nesta página.
+        O valor depende de vários fatores:</p>
+      </header>
+
+      <div class="rt-note">
+        <ul class="rt-cols">
+          <li>Cidade de saída no Brasil</li>
+          <li>Data da viagem</li>
+          <li>Passagem aérea</li>
+          <li>Categoria do hotel</li>
+          <li>Número de passageiros</li>
+          <li>Tipo de transporte</li>
+          <li>Duração escolhida</li>
+          <li>Ingressos</li>
+          <li>Refeições</li>
+          <li>Extensão do roteiro</li>
+        </ul>
+      </div>
+
+      <div class="rt-note">
+        <p>Depois do preenchimento do formulário, a Rock Tour envia uma <strong>proposta
+        personalizada</strong> com o roteiro, a hospedagem e os valores da sua viagem.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rt-section rt-form-section" id="cotacao">
+    <div class="container">
+      <header class="rt-head">
+        <span class="rt-kicker">Formulário de interesse</span>
+        <h2>QUERO PARTICIPAR DA CONFERÊNCIA GERAL</h2>
+        <p>Preencha os dados abaixo e a Rock Tour entra em contato com uma proposta feita para você.</p>
+      </header>
+
+      <form class="contact-form light rt-form" action="#" method="post" novalidate>
+        <div class="rt-grid">
+          <label class="rt-field"><span>Nome</span>
+            <input type="text" name="nome" required>
+          </label>
+          <label class="rt-field"><span>E-mail</span>
+            <input type="email" name="email" required>
+          </label>
+          <label class="rt-field"><span>WhatsApp</span>
+            <input type="tel" name="whatsapp" required>
+          </label>
+          <label class="rt-field"><span>Cidade de origem</span>
+            <input type="text" name="cidade" required>
+          </label>
+          <label class="rt-field"><span>Número de pessoas</span>
+            <input type="number" name="pessoas" min="1" value="1">
+          </label>
+          <label class="rt-field"><span>Data de chegada</span>
+            <input type="date" name="chegada">
+          </label>
+          <label class="rt-field"><span>Data de retorno</span>
+            <input type="date" name="retorno">
+          </label>
+        </div>
+
+        <fieldset class="rt-fieldset">
+          <legend>Qual experiência você deseja?</legend>
+          <div class="rt-radios">
+            <label><input type="radio" name="experiencia" value="Rota Histórica"><span>Rota Histórica</span></label>
+            <label><input type="radio" name="experiencia" value="Conferência + Grandes Parques"><span>Conferência + Grandes Parques</span></label>
+            <label><input type="radio" name="experiencia" value="Conferência + Utah Experience"><span>Conferência + Utah Experience</span></label>
+            <label><input type="radio" name="experiencia" value="Ainda não sei" checked><span>Ainda não sei, quero orientação</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="rt-fieldset">
+          <legend>Categoria de hospedagem</legend>
+          <div class="rt-radios">
+            <label><input type="radio" name="hospedagem" value="Econômica"><span>Econômica</span></label>
+            <label><input type="radio" name="hospedagem" value="Conforto" checked><span>Conforto</span></label>
+            <label><input type="radio" name="hospedagem" value="Premium"><span>Premium</span></label>
+          </div>
+        </fieldset>
+
+        <label class="rt-field" style="margin-top: 24px;"><span>Mensagem (opcional)</span>
+          <textarea name="mensagem" rows="4"></textarea>
+        </label>
+
+        <input type="text" name="_honey" class="form-honey rt-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="rt-actions">
+          <button type="submit" class="rt-btn">Solicitar cotação</button>
+          <a class="rt-btn-whats" href="https://wa.me/13853437555?text=Ol%C3%A1%21%20Quero%20participar%20da%20Confer%C3%AAncia%20Geral%20em%20Salt%20Lake%20City%20com%20a%20Rock%20Tour." target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i><span>Prefiro o WhatsApp</span></a>
+        </div>
+        <p class="form-status rt-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="rt-band">
+    <h2>VIVA A CONFERÊNCIA. CONHEÇA A HISTÓRIA. DESCUBRA O OESTE AMERICANO.</h2>
+    <p>Uma experiência especial da Rock Tour para brasileiros em Salt Lake City.</p>
+    <p class="rt-tags">História &bull; Fé &bull; Cultura &bull; Natureza &bull; Experiência</p>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="logo"><img src="img/logo-rocktour.png" alt="Rock Tour"></a>
+        <p>Para nós da Rock Tour viajar está na lista das cinco melhores coisas do mundo.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="nossa-historia.html">Nossa história</a></li>
+          <li><a href="mundo-mormon.html">Mundo Mórmon</a></li>
+          <li><a href="pacotes-internacionais.html">Pacotes Internacionais</a></li>
+          <li><a href="pacotes-nacionais.html">Pacotes Nacionais</a></li>
+          <li><a href="parana.html">Paraná</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul class="footer-contact">
+          <li><i class="fa-solid fa-envelope"></i><a href="mailto:rocktourcontato@gmail.com">rocktourcontato@gmail.com</a></li>
+          <li><i class="fa-solid fa-mobile-screen"></i><a href="tel:+13853437555">+1 (385) 343-7555</a></li>
+        </ul>
+        <div class="social">
+          <a href="https://www.facebook.com/rocktouragencia/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#instagram" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span class="year">2026</span> Rock Tour. <span>Todos os direitos reservados.</span></p>
+    </div>
+  </footer>
+
+  <!-- Botão flutuante do WhatsApp -->
+  <a href="https://wa.me/13853437555" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <!-- Player de música (mp3 ou YouTube, definido em js/main.js) -->
+  <div class="yt-player" id="ytPlayer" hidden>
+    <div class="yt-head">
+      <span><i class="fa-solid fa-music"></i> <span>Música</span></span>
+      <button class="yt-close" type="button" aria-label="Fechar player"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="yt-frame"><div id="ytFrame"></div></div>
+    <div class="mp3-ui" hidden>
+      <button type="button" class="mp3-play" aria-label="Tocar"><i class="fa-solid fa-play"></i></button>
+      <div class="mp3-info">
+        <span class="mp3-label"><span>Música</span></span>
+        <p class="mp3-title"></p>
+      </div>
+      <button type="button" class="mp3-prev" aria-label="Música anterior"><i class="fa-solid fa-backward-step"></i></button>
+      <button type="button" class="mp3-next" aria-label="Próxima música"><i class="fa-solid fa-forward-step"></i></button>
+      <div class="mp3-volume">
+        <button type="button" class="mp3-mute" aria-label="Silenciar"><i class="fa-solid fa-volume-high"></i></button>
+        <input type="range" class="mp3-vol" min="0" max="100" step="1" value="50" aria-label="Volume">
+      </div>
+      <button type="button" class="mp3-close" aria-label="Fechar player"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+  <button class="music-btn" type="button" aria-label="Abrir player de música" aria-expanded="false"><i class="fa-solid fa-music"></i></button>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
