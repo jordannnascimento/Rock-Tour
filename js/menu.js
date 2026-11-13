@@ -34,7 +34,10 @@
   });
 
   document.addEventListener('click', function (e) {
-    if (!e.target.closest || !e.target.closest('.rt-has-sub')) fecharTodos();
+    if (!e.target.closest) return;
+    // Clique em um destino: o site troca a página sem recarregar, então fechamos o submenu
+    if (e.target.closest('.rt-submenu a')) { fecharTodos(); return; }
+    if (!e.target.closest('.rt-has-sub')) fecharTodos();
   });
 
   document.addEventListener('keydown', function (e) {

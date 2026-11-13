@@ -5,19 +5,40 @@
    ========================================================================== */
 
 :root {
-  --rt-ink: #1f1b18;
-  --rt-soft: #5e564e;
-  --rt-line: #e4ddd4;
-  --rt-paper: #faf7f3;
-  --rt-accent: #b8623a;
-  --rt-accent-2: #e8894a;
+  /* paleta da marca Rock Tour */
+  --rt-azul: #0f4fb8;
+  --rt-azul-escuro: #012794;
+  --rt-azul-claro: #08ade5;
+  --rt-amarelo: #ffc904;
+  --rt-laranja: #fb8605;
+  --rt-vermelho: #d40000;
+  --rt-verde: #0a7d21;
+  --rt-teal: #027ea2;
+  --rt-roxo: #8b1fd0;
+  --rt-arco-iris: linear-gradient(90deg,
+    var(--rt-vermelho), var(--rt-laranja), var(--rt-amarelo),
+    var(--rt-verde), var(--rt-teal), var(--rt-azul), var(--rt-roxo));
+
+  /* neutros, alinhados com o style.css do site */
+  --rt-ink: #1d1d1d;
+  --rt-soft: #5f5f5f;
+  --rt-line: #e4e4e4;
+  --rt-paper: #f7f6f4;
+
+  /* papéis: azul estrutura, vermelho destaca preço */
+  --rt-accent: var(--rt-azul);
+  --rt-accent-2: var(--rt-azul-claro);
   --rt-whats: #25d366;
   --rt-radius: 14px;
 }
 
 /* ------------------------------------------- submenu do menu principal --- */
-/* Se o seu menu mobile abrir em outra largura, troque o 900px das duas medias. */
+/* O menu do site vira botao em 1240px (media do style.css), por isso o corte aqui. */
 .rt-has-sub { position: relative; }
+/* sem as barras "/" entre os itens; o espacamento passa a vir do gap */
+.nav li + li::before { content: none; display: none; margin: 0; }
+.nav ul { column-gap: 22px; }
+.rt-has-sub .rt-submenu li + li::before { content: none; display: none; margin: 0; }
 .rt-has-sub > .rt-submenu {
   display: block; list-style: none; margin: 0; padding: 8px;
   position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(6px);
@@ -45,11 +66,17 @@
   border-top: 1px solid var(--rt-line); border-radius: 0 0 8px 8px;
   margin-top: 6px; padding-top: 12px; font-size: 13px; color: var(--rt-soft);
 }
+/* a setinha fica sempre visivel, para a pessoa saber que ha itens ali */
 .rt-has-sub > .rt-sub-toggle {
-  display: none; background: none; border: 0; cursor: pointer; padding: 4px 6px;
-  color: inherit; font-size: 11px; line-height: 1;
+  display: inline-flex; align-items: center; background: none; border: 0;
+  cursor: pointer; padding: 2px 0 2px 6px; margin: 0;
+  color: var(--rt-azul); font-size: 10px; line-height: 1;
+  transition: transform .18s ease;
 }
-@media (min-width: 901px) {
+.rt-has-sub > .rt-sub-toggle svg { display: block; }
+.rt-has-sub:hover > .rt-sub-toggle,
+.rt-has-sub.rt-open > .rt-sub-toggle { transform: rotate(180deg); }
+@media (min-width: 1241px) {
   .rt-has-sub:hover > .rt-submenu,
   .rt-has-sub:focus-within > .rt-submenu,
   .rt-has-sub.rt-open > .rt-submenu {
@@ -57,9 +84,11 @@
     transform: translateX(-50%) translateY(0);
   }
 }
-@media (max-width: 900px) {
+@media (max-width: 1240px) {
   .rt-has-sub { display: flex; flex-wrap: wrap; align-items: center; }
-  .rt-has-sub > .rt-sub-toggle { display: inline-flex; align-items: center; }
+  .rt-has-sub > .rt-sub-toggle { padding: 6px 10px; font-size: 13px; }
+  .rt-has-sub:hover > .rt-sub-toggle { transform: none; }
+  .rt-has-sub.rt-open > .rt-sub-toggle { transform: rotate(180deg); }
   .rt-has-sub > .rt-submenu {
     display: none; position: static; transform: none; opacity: 1; visibility: visible;
     pointer-events: auto; box-shadow: none; border: 0;
@@ -116,11 +145,11 @@
 .rt-option:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(31, 27, 24, .1); }
 .rt-option::before {
   content: ""; position: absolute; inset: 0 0 auto 0; height: 4px;
-  background: linear-gradient(90deg, var(--rt-accent), var(--rt-accent-2));
+  background: var(--rt-arco-iris);
 }
 .rt-option-num {
   font-family: "PT Serif", Georgia, serif; font-size: 44px; line-height: 1;
-  color: var(--rt-accent-2); opacity: .55; margin-bottom: 14px;
+  color: var(--rt-azul); opacity: .4; margin-bottom: 14px;
 }
 .rt-option h3 {
   font-family: "Montserrat", Arial, sans-serif; font-size: 19px; font-weight: 800;
@@ -161,7 +190,18 @@
   background: var(--rt-paper); border: 1px solid var(--rt-line);
   padding: 8px 14px; border-radius: 999px;
 }
-.rt-meta .rt-price { background: var(--rt-ink); border-color: var(--rt-ink); color: #fff; }
+.rt-meta .rt-price {
+  background: var(--rt-azul-escuro); border-color: var(--rt-azul-escuro); color: #fff;
+}
+
+/* preço fora da pílula, onde o texto é longo */
+.rt-price-line {
+  font-size: 15px; color: var(--rt-soft); margin: 0 0 18px; line-height: 1.5;
+}
+.rt-price-line strong {
+  font-family: "Montserrat", Arial, sans-serif; font-size: 22px; font-weight: 800;
+  color: var(--rt-vermelho); letter-spacing: -.01em;
+}
 
 /* etapas / dias ----------------------------------------------------------- */
 .rt-steps { list-style: none; margin: 0; padding: 0; position: relative; }
@@ -173,7 +213,7 @@
 .rt-step:last-child { padding-bottom: 0; }
 .rt-step::before {
   content: ""; position: absolute; left: 0; top: 7px; width: 15px; height: 15px;
-  border-radius: 50%; background: #fff; border: 3px solid var(--rt-accent-2);
+  border-radius: 50%; background: #fff; border: 3px solid var(--rt-azul);
 }
 .rt-step h4 {
   font-family: "Montserrat", Arial, sans-serif; font-size: 15px; font-weight: 800;
@@ -186,7 +226,7 @@
 }
 .rt-step ul li::before {
   content: ""; position: absolute; left: 0; top: 12px; width: 5px; height: 5px;
-  border-radius: 50%; background: var(--rt-accent-2);
+  border-radius: 50%; background: var(--rt-amarelo);
 }
 
 /* --------------------------------------------- pacotes de 3 dias -------- */
@@ -208,7 +248,7 @@
 .rt-package-body { padding: 30px; }
 .rt-package-body > p.rt-about { font-size: 16px; line-height: 1.75; color: var(--rt-soft); margin: 0 0 30px; }
 .rt-days { display: grid; gap: 26px; }
-.rt-day { border-left: 2px solid var(--rt-accent-2); padding-left: 20px; }
+.rt-day { border-left: 3px solid var(--rt-amarelo); padding-left: 20px; }
 .rt-day h4 {
   font-family: "Montserrat", Arial, sans-serif; font-size: 14px; font-weight: 800;
   letter-spacing: .1em; text-transform: uppercase; color: var(--rt-ink); margin: 0 0 12px;
@@ -248,7 +288,32 @@
 }
 .rt-tour .rt-sub {
   font-size: 13px; font-weight: 600; letter-spacing: .04em;
-  color: var(--rt-accent); margin: -8px 0 16px; line-height: 1.6;
+  color: var(--rt-azul); margin: -8px 0 16px; line-height: 1.6;
+}
+
+/* card com foto -------------------------------------------------------- */
+.rt-card { padding: 0; overflow: hidden; }
+.rt-card-img {
+  display: block; position: relative; background: #ddd;
+  aspect-ratio: 16 / 10; overflow: hidden; line-height: 0;
+}
+.rt-card-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .4s ease;
+}
+.rt-card:hover .rt-card-img img { transform: scale(1.05); }
+.rt-card-img.sem-foto { background: var(--rt-paper); }
+.rt-card-img.sem-foto img { display: none; }
+.rt-card-body {
+  display: flex; flex-direction: column; flex: 1 1 auto; padding: 26px 24px 24px;
+}
+.rt-card-body h3 { margin-bottom: 10px; }
+.rt-card-body h3 a { text-decoration: none; color: inherit; }
+.rt-card-body h3 a:hover { color: var(--rt-azul); }
+.rt-card .rt-sub { margin: 0 0 14px; }
+.rt-card .rt-meta { margin-bottom: 14px; }
+@media (prefers-reduced-motion: reduce) {
+  .rt-card:hover .rt-card-img img { transform: none; }
 }
 .rt-tour .rt-meta { margin-bottom: 18px; }
 .rt-tour p { font-size: 15px; line-height: 1.75; color: var(--rt-soft); margin: 0 0 24px; }
@@ -284,12 +349,13 @@
 }
 .rt-table tbody td { color: var(--rt-soft); }
 .rt-table tbody td:first-child { color: var(--rt-ink); font-weight: 600; }
-.rt-table tbody td:last-child { font-weight: 700; color: var(--rt-ink); white-space: nowrap; }
+.rt-table tbody td:last-child { font-weight: 800; color: var(--rt-vermelho); white-space: nowrap; }
+.rt-table thead { border-top: 3px solid transparent; border-image: var(--rt-arco-iris) 1; }
 
 /* -------------------------------------------------------------- nota ---- */
 .rt-note {
   background: var(--rt-paper); border: 1px solid var(--rt-line);
-  border-left: 4px solid var(--rt-accent-2); border-radius: 10px;
+  border-left: 4px solid var(--rt-azul-claro); border-radius: 10px;
   padding: 22px 26px; margin-top: 30px;
 }
 .rt-note p { font-size: 15px; line-height: 1.75; color: var(--rt-soft); margin: 0 0 10px; }
@@ -302,7 +368,7 @@
 }
 .rt-cols li::before {
   content: ""; position: absolute; left: 0; top: 14px; width: 5px; height: 5px;
-  border-radius: 50%; background: var(--rt-accent-2);
+  border-radius: 50%; background: var(--rt-azul);
 }
 
 /* ---------------------------------------------- formulario de cotacao --- */
@@ -315,12 +381,15 @@
   font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
   color: var(--rt-ink); margin-bottom: 8px;
 }
-.rt-form input[type="text"], .rt-form input[type="email"], .rt-form input[type="tel"],
-.rt-form input[type="date"], .rt-form input[type="number"], .rt-form textarea {
+/* especificidade alta de proposito: o style.css estiliza .contact-form.light input */
+.rt-form .rt-field input, .rt-form .rt-field textarea {
   width: 100%; font: inherit; font-size: 15px; color: var(--rt-ink); background: #fff;
   border: 1px solid var(--rt-line); border-radius: 10px; padding: 13px 15px;
 }
-.rt-form input:focus, .rt-form textarea:focus { outline: 2px solid var(--rt-accent-2); outline-offset: 1px; }
+.rt-form .rt-field textarea { min-height: 120px; resize: vertical; }
+.rt-form .rt-field input:focus, .rt-form .rt-field textarea:focus {
+  border-color: var(--rt-accent); outline: 2px solid var(--rt-accent-2); outline-offset: 1px;
+}
 .rt-fieldset { border: 0; padding: 0; margin: 30px 0 0; }
 .rt-fieldset legend {
   font-family: "Montserrat", Arial, sans-serif; font-size: 12px; font-weight: 700;
@@ -330,6 +399,7 @@
 .rt-radios { display: flex; flex-wrap: wrap; gap: 10px; }
 .rt-radios label {
   display: inline-flex; align-items: center; gap: 9px; cursor: pointer;
+  flex: 0 0 auto; white-space: nowrap;
   background: #fff; border: 1px solid var(--rt-line); border-radius: 999px;
   padding: 11px 18px; font-size: 14px; color: var(--rt-soft);
   transition: border-color .15s ease, color .15s ease;
@@ -341,7 +411,14 @@
 .rt-status { font-size: 15px; color: var(--rt-soft); margin: 14px 0 0; }
 
 /* -------------------------------------------------------- faixa final --- */
-.rt-band { background: var(--rt-ink); color: #fff; text-align: center; padding: 70px 20px; }
+.rt-band {
+  position: relative; background: var(--rt-ink); color: #fff;
+  text-align: center; padding: 70px 20px;
+}
+.rt-band::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 4px;
+  background: var(--rt-arco-iris);
+}
 .rt-band h2 {
   font-family: "Montserrat", Arial, sans-serif; font-size: clamp(20px, 3.2vw, 34px);
   font-weight: 800; letter-spacing: .04em; line-height: 1.35; margin: 0 auto 18px; max-width: 900px;
@@ -349,7 +426,7 @@
 .rt-band p { font-size: 16px; line-height: 1.7; color: rgba(255, 255, 255, .78); margin: 0 auto; max-width: 620px; }
 .rt-band .rt-tags {
   font-family: "Montserrat", Arial, sans-serif; font-size: 12px; font-weight: 700;
-  letter-spacing: .24em; text-transform: uppercase; color: var(--rt-accent-2); margin-top: 26px;
+  letter-spacing: .24em; text-transform: uppercase; color: var(--rt-amarelo); margin-top: 26px;
 }
 
 /* ------------------------------------------------------------- mobile --- */
